@@ -1,5 +1,13 @@
 # How to generate rails new project with docker-compose
 
+when i run command with $ rails new PROJECT with postgresql
+i realize struggle and tired that generate rails project files and setup database. 
+if i got something wrong local environment such as rbenv, rvm on macOS or another OS. it's made me burnout.
+
+docker-compose is perfect awesome developerment environment. 
+when i generate rails project with docker-compose, i don't need any setup on local environment like ruby, rails version, database setup. 
+docker-compose made easy setup rails project, database and another env.
+
 ## ```rails new``` command with docker-compose
 ```
 $ docker-compose run --no-deps web rails new . --force --database=postgresql
