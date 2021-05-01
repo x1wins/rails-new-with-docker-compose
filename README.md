@@ -57,3 +57,12 @@ docker-compose run --no-deps web bundle exec rake db:migrate RAILS_ENV=test
 docker-compose up --build
 ```
 
+## Restart
+```
+docker-compose restart web
+```
+
+## Console
+```
+docker-compose run --no-deps web bundle exec rails console
+```
