@@ -1,68 +1,24 @@
-# How to generate rails new project with docker-compose
+# README
 
-when i run command with $ rails new PROJECT with postgresql
-i realize struggle and tired that generate rails project files and setup database. 
-if i got something wrong local environment such as rbenv, rvm on macOS or another OS. it's made me burnout.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-docker-compose is perfect awesome developerment environment. 
-when i generate rails project with docker-compose, i don't need any setup on local environment like ruby, rails version, database setup. 
-docker-compose made easy setup rails project, database and another env.
+Things you may want to cover:
 
-## ```rails new``` command with docker-compose
-```
-$ git clone https://github.com/x1wins/rails-new-with-docker-compose.git
-$ cd ./rails-new-with-docker-compose
-$ docker-compose run --no-deps web rails new . --force --database=postgresql
-```
+* Ruby version
 
-## config/database.yml
-```
-$ vim config/database.yml
-```
-```yaml
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  host: db
-  username: postgres
-  password: password
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+* System dependencies
 
-development:
-  <<: *default
-  database: myapp_development
+* Configuration
 
-test:
-  <<: *default
-  database: myapp_test
+* Database creation
 
-production:
-  <<: *default
-  database: myapp_production
-  username: myapp
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
-```
+* Database initialization
 
-## Setup
-```bash
-docker-compose run --no-deps web bundle exec rails webpacker:install
-docker-compose run --no-deps web bundle exec rake db:create
-docker-compose run --no-deps web bundle exec rake db:migrate
-docker-compose run --no-deps web bundle exec rake db:create RAILS_ENV=test
-docker-compose run --no-deps web bundle exec rake db:migrate RAILS_ENV=test
-```
+* How to run the test suite
 
-## Start rails server
-```bash
-docker-compose up --build
-```
+* Services (job queues, cache servers, search engines, etc.)
 
-## Restart
-```
-docker-compose restart web
-```
+* Deployment instructions
 
-## Console
-```
-docker-compose run --no-deps web bundle exec rails console
-```
+* ...
