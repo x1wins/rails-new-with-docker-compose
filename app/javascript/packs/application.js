@@ -11,3 +11,5 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+require("startbootstrap-sb-admin-2/css/sb-admin-2.css")
