@@ -1,19 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @store.name %>
-</p>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <%= @store.name %>
 
-<p>
-  <strong>Logo:</strong>
-  <%= @store.logo %>
-</p>
+  </div>
+  <div class="form-group col-md-6">
+    <%= @store.logo %>
 
-<p>
-  <strong>Lockable:</strong>
-  <%= @store.lockable %>
-</p>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <%= @store.lockable %>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_store_path(@store) %> |
 <%= link_to 'Back', stores_path %>
