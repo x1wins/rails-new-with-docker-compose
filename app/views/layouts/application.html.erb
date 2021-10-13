@@ -13,7 +13,20 @@
   <body id="page-top">
     <div id="wrapper">
       <%= render "layouts/sidebar" %>
-      <%= yield %>
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <%= render "layouts/topbar" %>
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <%= yield %>
+          </div>
+        </div>
+        <!-- End of Main Content -->
+        <%= render "layouts/footer" %>
+      </div>
+      <!-- End of Content Wrapper -->
     </div>
 
     <!-- Scroll to Top Button-->
