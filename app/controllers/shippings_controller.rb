@@ -13,6 +13,7 @@ class ShippingsController < ApplicationController
   # GET /shippings/new
   def new
     @shipping = Shipping.new
+    @shipping.parcel = Parcel.new
   end
 
   # GET /shippings/1/edit
@@ -64,6 +65,6 @@ class ShippingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shipping_params
-      params.fetch(:shipping, {})
+      params.fetch(:shipping, { parcel_attributes: [:box_count, :memo, :status] })
     end
 end

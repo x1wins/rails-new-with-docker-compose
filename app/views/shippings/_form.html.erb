@@ -2,7 +2,6 @@
   <% if shipping.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(shipping.errors.count, "error") %> prohibited this shipping from being saved:</h2>
-
       <ul>
         <% shipping.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,7 +9,19 @@
       </ul>
     </div>
   <% end %>
-
+  Parcel:
+  <ul>
+    <%= form.fields_for :parcel do |parcel_form| %>
+      <li>
+        <%= parcel_form.label :box_count %>
+        <%= parcel_form.text_field :box_count %>
+        <%= parcel_form.label :memo %>
+        <%= parcel_form.text_field :memo %>
+        <%= parcel_form.label :status %>
+        <%= parcel_form.text_field :status %>
+      </li>
+    <% end %>
+  </ul>
   <div class="actions">
     <%= form.submit %>
   </div>
