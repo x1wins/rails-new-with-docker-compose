@@ -16,8 +16,24 @@
   <!-- Nav Item - Charts -->
   <li class="nav-item <%= 'active' if controller.controller_name == StoresController.controller_name %>">
     <a class="nav-link" href="<%= stores_path %>">
-      <i class="fas fa-fw fa-chart-area"></i>
+      <i class="fas fa-fw fa-store"></i>
       <span>Store</span></a>
+  </li>
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Shipping
+  </div>
+  <!-- Nav Item - Charts -->
+  <li class="nav-item <%= 'active' if controller.controller_name == ShippingsController.controller_name and (controller.action_name == 'new' or controller.action_name == 'edit') %>">
+    <a class="nav-link" href="<%= new_shipping_path %>">
+      <i class="fas fa-fw fa-dolly"></i>
+      <span>Form</span></a>
+  </li>
+  <li class="nav-item <%= 'active' if controller.controller_name == ShippingsController.controller_name and (controller.action_name == 'index') %>">
+    <a class="nav-link" href="<%= shippings_path %>">
+      <i class="fas fa-fw fa-shipping-fast"></i>
+      <span>List</span></a>
   </li>
 
   <!-- Divider -->

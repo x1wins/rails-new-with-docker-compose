@@ -1,0 +1,9 @@
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-dolly fa-lg text-primary"></i> Edit <%= Shipping.model_name %></h1>
+</div>
+
+<%= render 'form', shipping: @shipping %>
+
+<%= link_to 'Show', @shipping %> |
+<%= link_to 'Back', shippings_path %>
