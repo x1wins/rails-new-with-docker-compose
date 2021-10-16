@@ -65,6 +65,6 @@ class ShippingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shipping_params
-      params.fetch(:shipping, { parcel_attributes: [:box_count, :memo, :status] })
+      params.require(:shipping).permit(parcel_attributes: [:box_count, :memo, :status])
     end
 end
