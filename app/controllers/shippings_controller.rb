@@ -13,7 +13,7 @@ class ShippingsController < ApplicationController
   # GET /shippings/new
   def new
     @shipping = Shipping.new
-    @shipping.parcel = Parcel.new
+    @shipping.build_parcel
   end
 
   # GET /shippings/1/edit
