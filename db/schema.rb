@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_13_220718) do
+ActiveRecord::Schema.define(version: 2021_10_16_090749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,10 @@ ActiveRecord::Schema.define(version: 2021_10_13_220718) do
     t.string "zipcode"
     t.string "address1"
     t.string "address2"
-    t.string "addressable_type", null: false
-    t.bigint "addressable_id", null: false
+    t.bigint "shipping_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
+    t.index ["shipping_id"], name: "index_addresses_on_shipping_id"
   end
 
   create_table "parcels", force: :cascade do |t|
@@ -53,5 +52,6 @@ ActiveRecord::Schema.define(version: 2021_10_13_220718) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "addresses", "shippings"
   add_foreign_key "parcels", "shippings"
 end
