@@ -14,6 +14,8 @@ class ShippingsController < ApplicationController
   def new
     @shipping = Shipping.new
     @shipping.build_parcel
+    @shipping.build_to_address
+    @shipping.build_from_address
   end
 
   # GET /shippings/1/edit
@@ -65,6 +67,6 @@ class ShippingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shipping_params
-      params.require(:shipping).permit(parcel_attributes: [:box_count, :memo, :status])
+      params.require(:shipping).permit(parcel_attributes: [:box_count, :memo, :status] ,to_address_attributes: [:owner_name, :ssn, :phone1, :phone2, :zipcode, :address1, :address2] ,from_address_attributes: [:owner_name, :ssn, :phone1, :phone2, :zipcode, :address1, :address2])
     end
 end
