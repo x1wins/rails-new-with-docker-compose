@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_16_090749) do
+ActiveRecord::Schema.define(version: 2021_10_17_060419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
+    t.string "type"
     t.string "owner_name"
     t.string "ssn"
     t.string "phone1"
@@ -23,10 +24,8 @@ ActiveRecord::Schema.define(version: 2021_10_16_090749) do
     t.string "zipcode"
     t.string "address1"
     t.string "address2"
-    t.bigint "shipping_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["shipping_id"], name: "index_addresses_on_shipping_id"
   end
 
   create_table "parcels", force: :cascade do |t|
@@ -42,6 +41,10 @@ ActiveRecord::Schema.define(version: 2021_10_16_090749) do
   create_table "shippings", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "to_address_id"
+    t.integer "from_address_id"
+    t.index ["from_address_id"], name: "index_shippings_on_from_address_id"
+    t.index ["to_address_id"], name: "index_shippings_on_to_address_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -52,6 +55,5 @@ ActiveRecord::Schema.define(version: 2021_10_16_090749) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "addresses", "shippings"
   add_foreign_key "parcels", "shippings"
 end

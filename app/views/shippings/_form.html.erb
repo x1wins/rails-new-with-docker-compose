@@ -22,6 +22,28 @@
       </li>
     <% end %>
   </ul>
+  TO Address:
+  <ul>
+    <%= form.fields_for :to_address do |to_address_form| %>
+      <li>
+        <%= to_address_form.label :address1 %>
+        <%= to_address_form.text_field :address1 %>
+        <%= to_address_form.label :address2 %>
+        <%= to_address_form.text_field :address2 %>
+      </li>
+    <% end %>
+  </ul>
+  FROM Address:
+  <ul>
+    <%= form.fields_for :from_address do |from_address_form| %>
+      <li>
+        <%= from_address_form.label :address1 %>
+        <%= from_address_form.text_field :address1 %>
+        <%= from_address_form.label :address2 %>
+        <%= from_address_form.text_field :address2 %>
+      </li>
+    <% end %>
+  </ul>
   <div class="actions">
     <%= form.submit %>
   </div>

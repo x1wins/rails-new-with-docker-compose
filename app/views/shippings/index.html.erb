@@ -12,6 +12,10 @@
       <th>box_count</th>
       <th>memo</th>
       <th>status</th>
+      <th>to address1</th>
+      <th>to address2</th>
+      <th>from address1</th>
+      <th>from address2</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,6 +27,10 @@
         <td><%= shipping&.parcel&.box_count %></td>
         <td><%= shipping&.parcel&.memo %></td>
         <td><%= shipping&.parcel&.status %></td>
+        <td><%= shipping&.to_address&.address1 %></td>
+        <td><%= shipping&.to_address&.address2 %></td>
+        <td><%= shipping&.from_address&.address1 %></td>
+        <td><%= shipping&.from_address&.address2 %></td>
         <td><%= link_to 'Show', shipping %></td>
         <td><%= link_to 'Edit', edit_shipping_path(shipping) %></td>
         <td><%= link_to 'Destroy', shipping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
