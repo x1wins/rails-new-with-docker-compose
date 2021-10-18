@@ -9,41 +9,61 @@
       </ul>
     </div>
   <% end %>
-  Parcel:
-  <ul>
-    <%= form.fields_for :parcel do |parcel_form| %>
-      <li>
-        <%= parcel_form.label :box_count %>
-        <%= parcel_form.text_field :box_count %>
-        <%= parcel_form.label :memo %>
-        <%= parcel_form.text_field :memo %>
-        <%= parcel_form.label :status %>
-        <%= parcel_form.text_field :status %>
-      </li>
-    <% end %>
-  </ul>
-  TO Address:
-  <ul>
-    <%= form.fields_for :to_address do |to_address_form| %>
-      <li>
-        <%= to_address_form.label :address1 %>
-        <%= to_address_form.text_field :address1 %>
-        <%= to_address_form.label :address2 %>
-        <%= to_address_form.text_field :address2 %>
-      </li>
-    <% end %>
-  </ul>
-  FROM Address:
-  <ul>
-    <%= form.fields_for :from_address do |from_address_form| %>
-      <li>
-        <%= from_address_form.label :address1 %>
-        <%= from_address_form.text_field :address1 %>
-        <%= from_address_form.label :address2 %>
-        <%= from_address_form.text_field :address2 %>
-      </li>
-    <% end %>
-  </ul>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <!-- Default Card Example -->
+      <div class="card mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Parcel</h6>
+        </div>
+        <div class="card-body">
+          <%= render 'shippings/form/parcel', form: form %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <!-- Default Card Example -->
+      <div class="card mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+        </div>
+        <div class="card-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <!-- Default Card Example -->
+      <div class="card mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">To Address</h6>
+        </div>
+        <div class="card-body">
+          <%= form.fields_for :to_address do |to_address_form| %>
+            <%= render 'shippings/form/address', address_form: to_address_form %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <!-- Default Card Example -->
+      <div class="card mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">From Address</h6>
+        </div>
+        <div class="card-body">
+          <%= form.fields_for :from_address do |from_address_form| %>
+            <%= render 'shippings/form/address', address_form: from_address_form %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

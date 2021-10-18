@@ -1,0 +1,18 @@
+<%= form.fields_for :parcel do |parcel_form| %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= parcel_form.label :box_count %>
+      <%= parcel_form.text_field :box_count, class:"form-control", placeholder:'BOX count'  %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= parcel_form.label :memo %>
+      <%= parcel_form.text_field :memo, class:"form-control", placeholder:'memo'  %>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= parcel_form.label :status %>
+      <%= parcel_form.text_field :status, class:"form-control", placeholder:'BOX count'  %>
+    </div>
+  </div>
+<% end %>
