@@ -1,44 +1,48 @@
-<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-shipping-fast fa-lg text-primary"></i> <%= Shipping.model_name %></h1>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Shipping list</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+          <th>customs_type</td><th>recipient_type</td>
+          <th>weight</td><th>order_number</td><th>product_name</td><th>count</td><th>price</td><th>hs_code</td>
+          <th>box_count</td><th>memo</td><th>status</td>
+          <th>owner_name</td><th>ssn</td><th>phone1</td><th>phone2</td><th>zipcode</td><th>address1</td><th>address2</td>
+          <th>owner_name</td><th>ssn</td><th>phone1</td><th>phone2</td><th>zipcode</td><th>address1</td><th>address2</td>
+          <th colspan="3"></td>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+          <th>customs_type</td><th>recipient_type</td>
+          <th>weight</td><th>order_number</td><th>product_name</td><th>count</td><th>price</td><th>hs_code</td>
+          <th>box_count</td><th>memo</td><th>status</td>
+          <th>owner_name</td><th>ssn</td><th>phone1</td><th>phone2</td><th>zipcode</td><th>address1</td><th>address2</td>
+          <th>owner_name</td><th>ssn</td><th>phone1</td><th>phone2</td><th>zipcode</td><th>address1</td><th>address2</td>
+          <th colspan="3"></td>
+        </tr>
+        </tfoot>
+        <tbody>
+        <% @shippings.each do |shipping| %>
+          <tr>
+            <th><%= shipping&.custom&.customs_type %></td><td><%= shipping&.custom&.recipient_type %></td>
+            <td><%= shipping&.order&.weight %></td><td><%= shipping&.order&.order_number %></td><td><%= shipping&.order&.product_name %></td><td><%= shipping&.order&.count %></td><td><%= shipping&.order&.price %></td><td><%= shipping&.order&.hs_code %></td>
+            <td><%= shipping&.parcel&.box_count %></td><td><%= shipping&.parcel&.memo %></td><td><%= shipping&.parcel&.status %></td>
+            <td><%= shipping&.to_address&.owner_name %></td><td><%= shipping&.to_address&.ssn %></td><td><%= shipping&.to_address&.phone1 %></td><td><%= shipping&.to_address&.phone2 %></td><td><%= shipping&.to_address&.zipcode %></td><td><%= shipping&.to_address&.address1 %></td><td><%= shipping&.to_address&.address2 %></td>
+            <td><%= shipping&.from_address&.owner_name %></td><td><%= shipping&.from_address&.ssn %></td><td><%= shipping&.from_address&.phone1 %></td><td><%= shipping&.from_address&.phone2 %></td><td><%= shipping&.from_address&.zipcode %></td><td><%= shipping&.from_address&.address1 %></td><td><%= shipping&.from_address&.address2 %></td>
+            <td><%= link_to 'Show', shipping %></td>
+            <td><%= link_to 'Edit', edit_shipping_path(shipping) %></td>
+            <td><%= link_to 'Destroy', shipping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-
-<p id="notice"><%= notice %></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>box_count</th>
-      <th>memo</th>
-      <th>status</th>
-      <th>to address1</th>
-      <th>to address2</th>
-      <th>from address1</th>
-      <th>from address2</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @shippings.each do |shipping| %>
-      <tr>
-        <td><%= shipping.id %></td>
-        <td><%= shipping&.parcel&.box_count %></td>
-        <td><%= shipping&.parcel&.memo %></td>
-        <td><%= shipping&.parcel&.status %></td>
-        <td><%= shipping&.to_address&.address1 %></td>
-        <td><%= shipping&.to_address&.address2 %></td>
-        <td><%= shipping&.from_address&.address1 %></td>
-        <td><%= shipping&.from_address&.address2 %></td>
-        <td><%= link_to 'Show', shipping %></td>
-        <td><%= link_to 'Edit', edit_shipping_path(shipping) %></td>
-        <td><%= link_to 'Destroy', shipping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
 
 <%= link_to 'New Shipping', new_shipping_path %>
