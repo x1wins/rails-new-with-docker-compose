@@ -1,0 +1,12 @@
+<%= form.fields_for :custom do |customs_form| %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= customs_form.label :customs_type %>
+      <%= customs_form.text_field :customs_type, class:"form-control", placeholder:'Customs Type'  %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= customs_form.label :recipient_type %>
+      <%= customs_form.text_field :recipient_type, class:"form-control", placeholder:'Recipient Type'  %>
+    </div>
+  </div>
+<% end %>

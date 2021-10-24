@@ -15,6 +15,20 @@
       <!-- Default Card Example -->
       <div class="card mb-4">
         <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Customs</h6>
+        </div>
+        <div class="card-body">
+          <%= render 'shippings/form/customs', form: form %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <!-- Default Card Example -->
+      <div class="card mb-4">
+        <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">Parcel</h6>
         </div>
         <div class="card-body">
@@ -26,10 +40,10 @@
       <!-- Default Card Example -->
       <div class="card mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+          <h6 class="m-0 font-weight-bold text-primary">Order</h6>
         </div>
         <div class="card-body">
-
+          <%= render 'shippings/form/order', form: form %>
         </div>
       </div>
     </div>
