@@ -13,6 +13,8 @@ class ShippingsController < ApplicationController
   # GET /shippings/new
   def new
     @shipping = Shipping.new
+    @shipping.build_custom
+    @shipping.build_order
     @shipping.build_parcel
     @shipping.build_to_address
     @shipping.build_from_address
@@ -67,6 +69,11 @@ class ShippingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shipping_params
-      params.require(:shipping).permit(parcel_attributes: [:box_count, :memo, :status] ,to_address_attributes: [:owner_name, :ssn, :phone1, :phone2, :zipcode, :address1, :address2] ,from_address_attributes: [:owner_name, :ssn, :phone1, :phone2, :zipcode, :address1, :address2])
+      params.require(:shipping).permit(
+          custom_attributes: [:customs_type, :recipient_type],
+          order_attributes: [:weight, :order_number, :product_name, :count, :price, :hs_code],
+          parcel_attributes: [:box_count, :memo, :status],
+          to_address_attributes: [:owner_name, :ssn, :phone1, :phone2, :zipcode, :address1, :address2],
+          from_address_attributes: [:owner_name, :ssn, :phone1, :phone2, :zipcode, :address1, :address2])
     end
 end
