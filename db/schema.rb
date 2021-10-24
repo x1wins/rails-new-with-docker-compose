@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_17_060419) do
+ActiveRecord::Schema.define(version: 2021_10_24_075121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,28 @@ ActiveRecord::Schema.define(version: 2021_10_17_060419) do
     t.string "address2"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customs", force: :cascade do |t|
+    t.integer "customs_type"
+    t.integer "recipient_type"
+    t.bigint "shipping_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shipping_id"], name: "index_customs_on_shipping_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.float "weight"
+    t.string "order_number"
+    t.string "product_name"
+    t.integer "count"
+    t.integer "price"
+    t.integer "hs_code"
+    t.bigint "shipping_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shipping_id"], name: "index_orders_on_shipping_id"
   end
 
   create_table "parcels", force: :cascade do |t|
@@ -55,5 +77,7 @@ ActiveRecord::Schema.define(version: 2021_10_17_060419) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "customs", "shippings"
+  add_foreign_key "orders", "shippings"
   add_foreign_key "parcels", "shippings"
 end
