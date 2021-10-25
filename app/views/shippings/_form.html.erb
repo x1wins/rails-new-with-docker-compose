@@ -49,9 +49,7 @@
           <h6 class="m-0 font-weight-bold text-primary">To Address</h6>
         </div>
         <div class="card-body">
-          <%= form.fields_for :to_address do |to_address_form| %>
-            <%= render 'shippings/form/address', form: to_address_form, object:shipping.to_address %>
-          <% end %>
+          <%= render 'shippings/form/to_address', form: form, object:shipping.to_address %>
         </div>
       </div>
     </div>
@@ -62,9 +60,7 @@
           <h6 class="m-0 font-weight-bold text-primary">From Address</h6>
         </div>
         <div class="card-body">
-          <%= form.fields_for :from_address do |from_address_form| %>
-            <%= render 'shippings/form/address', form: from_address_form, object:shipping.from_address %>
-          <% end %>
+          <%= render 'shippings/form/from_address', form: form, object:shipping.from_address %>
         </div>
       </div>
     </div>

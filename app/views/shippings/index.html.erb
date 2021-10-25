@@ -8,6 +8,7 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
         <tr>
+          <th scope="col">#</th>
           <th>customs_type</td><th>recipient_type</td>
           <th>weight</td><th>order_number</td><th>product_name</td><th>count</td><th>price</td><th>hs_code</td>
           <th>box_count</td><th>memo</td><th>status</td>
@@ -18,6 +19,7 @@
         </thead>
         <tfoot>
         <tr>
+          <th scope="col">#</th>
           <th>customs_type</td><th>recipient_type</td>
           <th>weight</td><th>order_number</td><th>product_name</td><th>count</td><th>price</td><th>hs_code</td>
           <th>box_count</td><th>memo</td><th>status</td>
@@ -29,8 +31,9 @@
         <tbody>
         <% @shippings.each do |shipping| %>
           <tr>
+            <th scope="row"><%= shipping&.id %></th>
             <th><%= shipping&.custom&.customs_type %></td><td><%= shipping&.custom&.recipient_type %></td>
-            <td><%= shipping&.order&.weight %></td><td><%= shipping&.order&.order_number %></td><td><%= shipping&.order&.product_name %></td><td><%= shipping&.order&.count %></td><td><%= shipping&.order&.price %></td><td><%= shipping&.order&.hs_code %></td>
+            <td><%= shipping&.order&.weight %></td><td><%= shipping&.order&.order_number %></td><td><%= shipping&.order&.product_name %></td><td><%= shipping&.order&.count %></td><td><%= number_to_currency(shipping&.order&.price, :unit => "$") %></td><td><%= shipping&.order&.hs_code %></td>
             <td><%= shipping&.parcel&.box_count %></td><td><%= shipping&.parcel&.memo %></td><td><%= shipping&.parcel&.status %></td>
             <td><%= shipping&.to_address&.owner_name %></td><td><%= shipping&.to_address&.ssn %></td><td><%= shipping&.to_address&.phone1 %></td><td><%= shipping&.to_address&.phone2 %></td><td><%= shipping&.to_address&.zipcode %></td><td><%= shipping&.to_address&.address1 %></td><td><%= shipping&.to_address&.address2 %></td>
             <td><%= shipping&.from_address&.owner_name %></td><td><%= shipping&.from_address&.ssn %></td><td><%= shipping&.from_address&.phone1 %></td><td><%= shipping&.from_address&.phone2 %></td><td><%= shipping&.from_address&.zipcode %></td><td><%= shipping&.from_address&.address1 %></td><td><%= shipping&.from_address&.address2 %></td>
