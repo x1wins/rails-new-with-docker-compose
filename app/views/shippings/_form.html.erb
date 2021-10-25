@@ -1,15 +1,4 @@
 <%= form_with(model: shipping) do |form| %>
-  <% if shipping.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(shipping.errors.count, "error") %> prohibited this shipping from being saved:</h2>
-      <ul>
-        <% shipping.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="row">
     <div class="col-lg-6">
       <div class="row">
@@ -20,7 +9,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Customs</h6>
             </div>
             <div class="card-body">
-              <%= render 'shippings/form/customs', form: form, customs:shipping.custom %>
+              <%= render 'shippings/form/customs', form: form, object:shipping.custom %>
             </div>
           </div>
         </div>
@@ -33,7 +22,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Parcel</h6>
             </div>
             <div class="card-body">
-              <%= render 'shippings/form/parcel', form: form %>
+              <%= render 'shippings/form/parcel', form: form, object:shipping.parcel %>
             </div>
           </div>
         </div>
@@ -46,7 +35,7 @@
           <h6 class="m-0 font-weight-bold text-primary">Order</h6>
         </div>
         <div class="card-body">
-          <%= render 'shippings/form/order', form: form %>
+          <%= render 'shippings/form/order', form: form, object:shipping.order %>
         </div>
       </div>
     </div>
@@ -61,7 +50,7 @@
         </div>
         <div class="card-body">
           <%= form.fields_for :to_address do |to_address_form| %>
-            <%= render 'shippings/form/address', address_form: to_address_form %>
+            <%= render 'shippings/form/address', form: to_address_form, object:shipping.to_address %>
           <% end %>
         </div>
       </div>
@@ -74,7 +63,7 @@
         </div>
         <div class="card-body">
           <%= form.fields_for :from_address do |from_address_form| %>
-            <%= render 'shippings/form/address', address_form: from_address_form %>
+            <%= render 'shippings/form/address', form: from_address_form, object:shipping.from_address %>
           <% end %>
         </div>
       </div>

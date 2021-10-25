@@ -1,22 +1,6 @@
 <%= form.fields_for :custom do |customs_form| %>
   <div class="form-row">
-    <div class="col-md-6">
-      <%= customs_form.label :customs_type %>
-      <%= customs_form.text_field :customs_type, class: customs.errors[:customs_type].size > 0 ? "form-control is-invalid": "form-control", placeholder:'Customs Type' %>
-      <% customs.errors[:customs_type].each do |message| %>
-      <div class="invalid-feedback">
-        <%= message %>
-      </div>
-      <% end %>
-    </div>
-    <div class="col-md-6">
-      <%= customs_form.label :recipient_type %>
-      <%= customs_form.text_field :recipient_type, class: customs.errors[:customs_type].size > 0 ? "form-control is-invalid": "form-control", placeholder:'Recipient Type'  %>
-      <% customs.errors[:recipient_type].each do |message| %>
-        <div class="invalid-feedback">
-          <%= message %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'shippings/form/text_field', sym_name: :customs_type, form: customs_form, errors: object.errors[:customs_type], placeholder: 'Customs Type' %>
+    <%= render 'shippings/form/text_field', sym_name: :recipient_type, form: customs_form, errors: object.errors[:recipient_type], placeholder: 'Recipient Type' %>
   </div>
 <% end %>

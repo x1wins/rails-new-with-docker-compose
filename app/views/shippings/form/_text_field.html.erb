@@ -1,0 +1,9 @@
+<div class="col-md-6">
+  <%= form.label sym_name %>
+  <%= form.text_field sym_name, class: errors.size > 0 ? "form-control is-invalid": "form-control", placeholder: placeholder %>
+  <% errors.each do |message| %>
+    <div class="invalid-feedback">
+      <%= message %>
+    </div>
+  <% end %>
+</div>

@@ -1,36 +1,15 @@
 <div class="form-row">
-  <div class="form-group col-md-6">
-    <%= address_form.label :owner_name %>
-    <%= address_form.text_field :owner_name, class:"form-control", placeholder:'owner name'  %>
-  </div>
-  <div class="form-group col-md-6">
-    <%= address_form.label :ssn %>
-    <%= address_form.text_field :ssn, class:"form-control", placeholder:'ssn'  %>
-  </div>
+  <%= render 'shippings/form/text_field', sym_name: :owner_name, form: form, errors: object.errors[:owner_name], placeholder: 'Owner Name' %>
+  <%= render 'shippings/form/text_field', sym_name: :ssn, form: form, errors: object.errors[:owner_name], placeholder: 'SSN' %>
 </div>
 <div class="form-row">
-  <div class="form-group col-md-6">
-    <%= address_form.label :phone1 %>
-    <%= address_form.text_field :phone1, class:"form-control", placeholder:'phone1'  %>
-  </div>
-  <div class="form-group col-md-6">
-    <%= address_form.label :phone2 %>
-    <%= address_form.text_field :phone2, class:"form-control", placeholder:'phone2'  %>
-  </div>
+  <%= render 'shippings/form/text_field', sym_name: :phone1, form: form, errors: object.errors[:phone1], placeholder: 'Owner Name' %>
+  <%= render 'shippings/form/text_field', sym_name: :phone2, form: form, errors: object.errors[:phone2], placeholder: 'Owner Name' %>
 </div>
 <div class="form-row">
-  <div class="form-group col-md-6">
-    <%= address_form.label :address1 %>
-    <%= address_form.text_field :address1, class:"form-control", placeholder:'address1'  %>
-  </div>
-  <div class="form-group col-md-6">
-    <%= address_form.label :address2 %>
-    <%= address_form.text_field :address2, class:"form-control", placeholder:'address2'  %>
-  </div>
+  <%= render 'shippings/form/text_field', sym_name: :address1, form: form, errors: object.errors[:address1], placeholder: 'Owner Name' %>
+  <%= render 'shippings/form/text_field', sym_name: :address2, form: form, errors: object.errors[:address2], placeholder: 'Owner Name' %>
 </div>
 <div class="form-row">
-  <div class="form-group col-md-6">
-    <%= address_form.label :zipcode %>
-    <%= address_form.text_field :zipcode, class:"form-control", placeholder:'zipcode'  %>
-  </div>
+  <%= render 'shippings/form/text_field', sym_name: :zipcode, form: form, errors: object.errors[:zipcode], placeholder: 'Owner Name' %>
 </div>
