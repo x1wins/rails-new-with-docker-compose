@@ -1,0 +1,72 @@
+<%= form_with(model: shipping) do |form| %>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="row">
+        <div class="col-lg">
+          <!-- Default Card Example -->
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Customs</h6>
+            </div>
+            <div class="card-body">
+              <%= render 'shippings/form/customs', form: form, object:shipping.custom %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg">
+          <!-- Default Card Example -->
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Parcel</h6>
+            </div>
+            <div class="card-body">
+              <%= render 'shippings/form/parcel', form: form, object:shipping.parcel %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <!-- Default Card Example -->
+      <div class="card mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Order</h6>
+        </div>
+        <div class="card-body">
+          <%= render 'shippings/form/order', form: form, object:shipping.order %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <!-- Default Card Example -->
+      <div class="card mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">To Address</h6>
+        </div>
+        <div class="card-body">
+          <%= render 'shippings/form/to_address', form: form, object:shipping.to_address %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <!-- Default Card Example -->
+      <div class="card mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">From Address</h6>
+        </div>
+        <div class="card-body">
+          <%= render 'shippings/form/from_address', form: form, object:shipping.from_address %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

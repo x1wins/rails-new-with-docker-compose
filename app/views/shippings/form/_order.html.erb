@@ -1,0 +1,14 @@
+<%= form.fields_for :order do |order_form| %>
+  <div class="form-row">
+    <%= render 'shippings/form/text_field', sym_name: :weight, form: order_form, errors: object.errors[:weight], placeholder: 'Weight' %>
+    <%= render 'shippings/form/text_field', sym_name: :order_number, form: order_form, errors: object.errors[:order_number], placeholder: 'order_number' %>
+  </div>
+  <div class="form-row">
+    <%= render 'shippings/form/text_field', sym_name: :product_name, form: order_form, errors: object.errors[:product_name], placeholder: 'product_name' %>
+    <%= render 'shippings/form/text_field', sym_name: :count, form: order_form, errors: object.errors[:count], placeholder: 'count' %>
+  </div>
+  <div class="form-row">
+    <%= render 'shippings/form/text_field', sym_name: :price, form: order_form, errors: object.errors[:price], placeholder: 'price' %>
+    <%= render 'shippings/form/text_field', sym_name: :hs_code, form: order_form, errors: object.errors[:hs_code], placeholder: 'hs_code' %>
+  </div>
+<% end %>

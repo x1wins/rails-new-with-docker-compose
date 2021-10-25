@@ -1,0 +1,9 @@
+<%= form.fields_for :parcel do |parcel_form| %>
+  <div class="form-row">
+    <%= render 'shippings/form/text_field', sym_name: :box_count, form: parcel_form, errors: object.errors[:box_count], placeholder: 'BOX count' %>
+    <%= render 'shippings/form/text_field', sym_name: :memo, form: parcel_form, errors: object.errors[:memo], placeholder: 'memo' %>
+  </div>
+  <div class="form-row">
+    <%= render 'shippings/form/text_field', sym_name: :status, form: parcel_form, errors: object.errors[:status], placeholder: 'status' %>
+  </div>
+<% end %>
