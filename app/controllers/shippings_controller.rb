@@ -3,7 +3,7 @@ class ShippingsController < ApplicationController
 
   # GET /shippings or /shippings.json
   def index
-    @shippings = Shipping.all
+    @pagy, @shippings = pagy(Shipping.all)
   end
 
   # GET /shippings/1 or /shippings/1.json
