@@ -22,7 +22,7 @@
     <tr>
       <td scope="row"><%= store.id %></td>
       <td><%= store.name %></td>
-      <td><%= store.logo %></td>
+      <td><img src="<%= store.logo %>" class="img-fluid" style="height: 20px;" alt="Responsive image"></td>
       <td>
         <% if store.lockable %>
         <i class="fas fa-lock fa-lg text-danger"></i> Lock
