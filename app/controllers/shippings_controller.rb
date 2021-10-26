@@ -4,7 +4,7 @@ class ShippingsController < ApplicationController
   # GET /shippings or /shippings.json
   def index
     search = params[:q]
-    @shippings = Shipping.joins(:order).where("orders.product_name LIKE 'Commandos%'").limit(10)
+    @pagy, @shippings = pagy(Shipping.unscoped.order("shippings.id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address).with_name_like(search))
   end
 
   # GET /shippings/1 or /shippings/1.json
