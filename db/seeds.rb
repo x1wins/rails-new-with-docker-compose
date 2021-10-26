@@ -10,5 +10,7 @@ require 'factory_bot_rails'
 
 2.times do
   FactoryBot.create :store
+end
+200.times do
   FactoryBot.create :shipping
 end
