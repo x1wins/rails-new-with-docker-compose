@@ -8,6 +8,7 @@
 
 require 'factory_bot_rails'
 
-10.times do
+2.times do
   FactoryBot.create :store
+  FactoryBot.create :shipping
 end
