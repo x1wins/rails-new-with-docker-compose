@@ -8,6 +8,6 @@
 
 require 'factory_bot_rails'
 
-2.times do
+10.times do
   FactoryBot.create :store
 end
