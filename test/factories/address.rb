@@ -1,5 +1,3 @@
-require 'faker'
-
 FactoryBot.define do
   factory :address do
     owner_name { Faker::Name.last_name }

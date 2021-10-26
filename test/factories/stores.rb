@@ -1,5 +1,3 @@
-require 'faker'
-
 company = Faker::Company
 FactoryBot.define do
   factory :store do
