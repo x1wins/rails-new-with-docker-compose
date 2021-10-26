@@ -1,3 +1,5 @@
+require 'pagy/extras/bootstrap'
+
 # frozen_string_literal: true
 
 # Pagy initializer file (5.1.2)

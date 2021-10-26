@@ -45,8 +45,13 @@
         </tbody>
       </table>
     </div>
+    <div class="table-responsive">
+      <div class="d-flex justify-content-center">
+        <%== pagy_bootstrap_nav(@pagy) %>
+      </div>
+    </div>
   </div>
 </div>
 
 <%= link_to 'New Shipping', new_shipping_path %>
-<%== pagy_nav(@pagy) %>
+
