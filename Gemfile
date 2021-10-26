@@ -56,4 +56,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :development, :test do
   gem 'factory_bot_rails'
+  gem 'faker'
 end
