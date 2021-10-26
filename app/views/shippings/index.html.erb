@@ -14,36 +14,45 @@
       <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
         <thead class="thead-dark">
         <tr>
-          <th scope="col">#</th><th scope="col">seq</th>
-          <th>customs_type</td><th>recipient_type</td>
-          <th>weight</td><th>order_number</td><th>product_name</td><th>count</td><th>price</td><th>hs_code</td>
-          <th>box_count</td><th>memo</td><th>status</td>
-          <th>owner_name</td><th>ssn</td><th>phone1</td><th>phone2</td><th>zipcode</td><th>address1</td><th>address2</td>
-          <th>owner_name</td><th>ssn</td><th>phone1</td><th>phone2</td><th>zipcode</td><th>address1</td><th>address2</td>
-          <th colspan="3"></td>
+          <th colspan="2" scope="col">ROW</th>
+          <th colspan="2" class="bg-primary">Customs</th>
+          <th colspan="6" class="bg-success">Order</th>
+          <th colspan="3" class="bg-warning">Parcel</th>
+          <th colspan="7" class="bg-danger">To Address</th>
+          <th colspan="7" class="bg-info">From Address</th>
+          <th colspan="3"></th>
+        </tr>
+        <tr>
+          <th scope="col">ID</th><th scope="col">seq</th>
+          <th class="bg-primary">customs_type</th><th class="bg-primary">recipient_type</th>
+          <th class="bg-success">weight</th><th class="bg-success">order_number</th><th class="bg-success">product_name</th><th class="bg-success">count</th><th class="bg-success">price</th><th class="bg-success">hs_code</th>
+          <th class="bg-warning">box_count</th><th class="bg-warning">memo</th><th class="bg-warning">status</th>
+          <th class="bg-danger">owner_name</th><th class="bg-danger">ssn</th><th class="bg-danger">phone1</th><th class="bg-danger">phone2</th><th class="bg-danger">zipcode</th><th class="bg-danger">address1</th><th class="bg-danger">address2</th>
+          <th class="bg-info">owner_name</th><th class="bg-info">ssn</th><th class="bg-info">phone1</th><th class="bg-info">phone2</th><th class="bg-info">zipcode</th><th class="bg-info">address1</th><th class="bg-info">address2</th>
+          <th colspan="3"></th>
         </tr>
         </thead>
         <tfoot class="thead-dark">
         <tr>
-          <th scope="col">#</th><th scope="col">seq</th>
-          <th>customs_type</td><th>recipient_type</td>
-          <th>weight</td><th>order_number</td><th>product_name</td><th>count</td><th>price</td><th>hs_code</td>
-          <th>box_count</td><th>memo</td><th>status</td>
-          <th>owner_name</td><th>ssn</td><th>phone1</td><th>phone2</td><th>zipcode</td><th>address1</td><th>address2</td>
-          <th>owner_name</td><th>ssn</td><th>phone1</td><th>phone2</td><th>zipcode</td><th>address1</td><th>address2</td>
-          <th colspan="3"></td>
+          <th scope="col">ID</th><th scope="col">seq</th>
+          <th class="bg-primary">customs_type</th><th class="bg-primary">recipient_type</th>
+          <th class="bg-success">weight</th><th class="bg-success">order_number</th><th class="bg-success">product_name</th><th class="bg-success">count</th><th class="bg-success">price</th><th class="bg-success">hs_code</th>
+          <th class="bg-warning">box_count</th><th class="bg-warning">memo</th><th class="bg-warning">status</th>
+          <th class="bg-danger">owner_name</th><th class="bg-danger">ssn</th><th class="bg-danger">phone1</th><th class="bg-danger">phone2</th><th class="bg-danger">zipcode</th><th class="bg-danger">address1</th><th class="bg-danger">address2</th>
+          <th class="bg-info">owner_name</th><th class="bg-info">ssn</th><th class="bg-info">phone1</th><th class="bg-info">phone2</th><th class="bg-info">zipcode</th><th class="bg-info">address1</th><th class="bg-info">address2</th>
+          <th colspan="3"></th>
         </tr>
         </tfoot>
         <tbody>
         <% @shippings.each do |shipping| %>
           <tr>
-            <th scope="row"><%= shipping&.id %></th><th scope="row"><%= shipping&.id %></th>
-            <th><%= shipping&.custom&.customs_type %></td><td><%= shipping&.custom&.recipient_type %></td>
-            <td><%= shipping&.order&.weight %></td><td><%= shipping&.order&.order_number %></td><td><%= shipping&.order&.product_name %></td><td><%= shipping&.order&.count %></td><td><%= number_to_currency(shipping&.order&.price, :unit => "$") %></td><td><%= shipping&.order&.hs_code %></td>
-            <td><%= shipping&.parcel&.box_count %></td><td><%= shipping&.parcel&.memo %></td><td><%= shipping&.parcel&.status %></td>
-            <td><%= shipping&.to_address&.owner_name %></td><td><%= shipping&.to_address&.ssn %></td><td><%= shipping&.to_address&.phone1 %></td><td><%= shipping&.to_address&.phone2 %></td><td><%= shipping&.to_address&.zipcode %></td><td><%= shipping&.to_address&.address1 %></td><td><%= shipping&.to_address&.address2 %></td>
-            <td><%= shipping&.from_address&.owner_name %></td><td><%= shipping&.from_address&.ssn %></td><td><%= shipping&.from_address&.phone1 %></td><td><%= shipping&.from_address&.phone2 %></td><td><%= shipping&.from_address&.zipcode %></td><td><%= shipping&.from_address&.address1 %></td><td><%= shipping&.from_address&.address2 %></td>
-            <td><%= link_to 'Show', shipping %></td>
+            <td scope="row"><%= shipping&.id %></td><td scope="row"><%= shipping&.id %></td>
+            <td class="border-left-primary"><%= shipping&.custom&.customs_type %></td><td><%= shipping&.custom&.recipient_type %></td>
+            <td class="border-left-success"><%= shipping&.order&.weight %></td><td><%= shipping&.order&.order_number %></td><td><%= shipping&.order&.product_name %></td><td><%= shipping&.order&.count %></td><td><%= number_to_currency(shipping&.order&.price, :unit => "$") %></td><td><%= shipping&.order&.hs_code %></td>
+            <td class="border-left-warning"><%= shipping&.parcel&.box_count %></td><td><%= shipping&.parcel&.memo %></td><td><%= shipping&.parcel&.status %></td>
+            <td class="border-left-danger"><%= shipping&.to_address&.owner_name %></td><td><%= shipping&.to_address&.ssn %></td><td><%= shipping&.to_address&.phone1 %></td><td><%= shipping&.to_address&.phone2 %></td><td><%= shipping&.to_address&.zipcode %></td><td><%= shipping&.to_address&.address1 %></td><td><%= shipping&.to_address&.address2 %></td>
+            <td class="border-left-info"><%= shipping&.from_address&.owner_name %></td><td><%= shipping&.from_address&.ssn %></td><td><%= shipping&.from_address&.phone1 %></td><td><%= shipping&.from_address&.phone2 %></td><td><%= shipping&.from_address&.zipcode %></td><td><%= shipping&.from_address&.address1 %></td><td><%= shipping&.from_address&.address2 %></td>
+            <td class="border-left-dark"><%= link_to 'Show', shipping %></td>
             <td><%= link_to 'Edit', edit_shipping_path(shipping) %></td>
             <td><%= link_to 'Destroy', shipping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
