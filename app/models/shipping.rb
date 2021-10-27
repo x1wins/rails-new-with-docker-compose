@@ -15,8 +15,8 @@ class Shipping < ApplicationRecord
         .or(to_address_with_name_like(search))
         .or(from_address_with_name_like(search))
         .joins(:order)
-        .joins(:to_address)
-        .joins(:from_address) if search.present?
+        .joins("LEFT JOIN addresses a ON shippings.to_address_id = a.id")
+        .joins("LEFT JOIN addresses b ON shippings.from_address_id = b.id") if search.present?
   }
   scope :parcel_with_name_like, lambda { |search|
     where("
@@ -29,21 +29,21 @@ class Shipping < ApplicationRecord
               ", search: "%#{search}%")
   }
   scope :to_address_with_name_like, lambda { |search|
-    where("addresses.owner_name LIKE :search
-                              OR addresses.ssn LIKE :search
-                              OR addresses.phone1 LIKE :search
-                              OR addresses.phone2 LIKE :search
-                              OR addresses.address1 LIKE :search
-                              OR addresses.address2 LIKE :search
-                              OR addresses.zipcode LIKE :search", search: "%#{search}%")
+    where("a.owner_name LIKE :search
+                              OR a.ssn LIKE :search
+                              OR a.phone1 LIKE :search
+                              OR a.phone2 LIKE :search
+                              OR a.address1 LIKE :search
+                              OR a.address2 LIKE :search
+                              OR a.zipcode LIKE :search", search: "%#{search}%")
   }
   scope :from_address_with_name_like, lambda { |search|
-    where("from_addresses_shippings.owner_name LIKE :search
-                                OR from_addresses_shippings.ssn LIKE :search
-                                OR from_addresses_shippings.phone1 LIKE :search
-                                OR from_addresses_shippings.phone2 LIKE :search
-                                OR from_addresses_shippings.address1 LIKE :search
-                                OR from_addresses_shippings.address2 LIKE :search
-                                OR from_addresses_shippings.zipcode LIKE :search", search: "%#{search}%")
+    where("b.owner_name LIKE :search
+                                OR b.ssn LIKE :search
+                                OR b.phone1 LIKE :search
+                                OR b.phone2 LIKE :search
+                                OR b.address1 LIKE :search
+                                OR b.address2 LIKE :search
+                                OR b.zipcode LIKE :search", search: "%#{search}%")
   }
 end
