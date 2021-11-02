@@ -1,4 +1,11 @@
 class Shipping < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :all_search, associated_against: {
+      order: [:order_number, :product_name, :price],
+      parcel: :memo,
+      to_address: [:type, :owner_name, :ssn, :phone1, :phone2, :address1, :address2, :zipcode],
+      from_address: [:type, :owner_name, :ssn, :phone1, :phone2, :address1, :address2, :zipcode]
+  }
   has_one :custom
   has_one :order
   has_one :parcel
