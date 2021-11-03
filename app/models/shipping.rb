@@ -5,6 +5,8 @@ class Shipping < ApplicationRecord
       parcel: :memo,
       to_address: [:owner_name, :ssn, :phone1, :phone2, :address1, :address2, :zipcode],
       from_address: [:owner_name, :ssn, :phone1, :phone2, :address1, :address2, :zipcode]
+  }, using: {
+      tsearch: {negation: true}
   }
   has_one :custom
   has_one :order
