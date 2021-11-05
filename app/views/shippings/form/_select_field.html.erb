@@ -1,0 +1,9 @@
+<div class="col-md-6">
+  <%= form.label sym_name %>
+  <%= form.select sym_name, options_for_select(enum), {}, { class: "form-control" } %>
+  <% errors.each do |message| %>
+    <div class="invalid-feedback">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
