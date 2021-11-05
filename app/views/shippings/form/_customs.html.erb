@@ -1,6 +1,6 @@
 <%= form.fields_for :custom do |customs_form| %>
   <div class="form-row">
-    <%= render 'shippings/form/text_field', sym_name: :customs_type, form: customs_form, errors: object.errors[:customs_type], placeholder: 'Customs Type' %>
-    <%= render 'shippings/form/text_field', sym_name: :recipient_type, form: customs_form, errors: object.errors[:recipient_type], placeholder: 'Recipient Type' %>
+    <%= render 'shippings/form/select_field', sym_name: :customs_type, form: customs_form, errors: object.errors[:customs_type], placeholder: 'Customs Type', enum: Custom.customs_types %>
+    <%= render 'shippings/form/select_field', sym_name: :recipient_type, form: customs_form, errors: object.errors[:recipient_type], placeholder: 'Recipient Type', enum: Custom.recipient_types %>
   </div>
 <% end %>
