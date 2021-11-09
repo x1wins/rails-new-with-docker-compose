@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :parcel, class: Parcel do
-    box_count { Faker::Number.within(range: 1..10) }
+    box_count { Faker::Number.within(range: 1..2) }
     memo { Faker::Lorem.sentence(word_count: 5) }
     status { Faker::Number.within(range: 1..3) }
   end
