@@ -47,7 +47,7 @@
         <% @shippings.each do |shipping| %>
           <tr>
             <td scope="row"><%= shipping&.id %></td><td scope="row"><%= shipping&.id %></td>
-            <td class="border-left-primary"><%= shipping&.custom&.customs_type %></td><td><%= shipping&.custom&.recipient_type %></td>
+            <td class="border-left-primary"><%= Custom.customs_types.key(shipping&.custom&.customs_type) %></td><td><%= Custom.recipient_types.key(shipping&.custom&.recipient_type) %></td>
             <td class="border-left-success"><%= shipping&.order&.weight %></td><td><%= shipping&.order&.order_number %></td><td><%= shipping&.order&.product_name %></td><td><%= shipping&.order&.count %></td><td><%= number_to_currency(shipping&.order&.price, :unit => "$") %></td><td><%= shipping&.order&.hs_code %></td>
             <td class="border-left-warning"><%= shipping&.parcel&.box_count %></td><td><%= shipping&.parcel&.memo %></td><td><%= shipping&.parcel&.status %></td>
             <td class="border-left-danger"><%= shipping&.to_address&.owner_name %></td><td><%= shipping&.to_address&.ssn %></td><td><%= shipping&.to_address&.phone1 %></td><td><%= shipping&.to_address&.phone2 %></td><td><%= shipping&.to_address&.zipcode %></td><td><%= shipping&.to_address&.address1 %></td><td><%= shipping&.to_address&.address2 %></td>
