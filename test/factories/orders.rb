@@ -3,7 +3,7 @@ price_per_lb = 1.5
 default_price = 6
 default_lb = 1
 additional_price = (weight - default_lb).ceil * price_per_lb
-price = default_price + additional_price
+price = (default_price + additional_price).to_int
 FactoryBot.define do
   factory :order, class: Order do
     weight { weight }
