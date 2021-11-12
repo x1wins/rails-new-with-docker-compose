@@ -59,3 +59,4 @@ gem 'factory_bot_rails'
 gem 'faker'
 # end
 gem 'pagy'
+gem 'rexml', '~> 3.2', '>= 3.2.5'
