@@ -2,7 +2,8 @@ require "test_helper"
 
 class ShippingsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @shipping = shippings(:one)
+    @shipping = FactoryBot.create :shipping
+    @builded_shipping = FactoryBot.build :shipping
   end
 
   test "should get index" do
@@ -34,7 +35,7 @@ class ShippingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update shipping" do
-    patch shipping_url(@shipping), params: { shipping: {  } }
+    patch shipping_url(@shipping), params: { shipping: @builded_shipping }
     assert_redirected_to shipping_url(@shipping)
   end
 
