@@ -3,7 +3,7 @@ require "test_helper"
 class StoresControllerTest < ActionDispatch::IntegrationTest
   setup do
     @store = FactoryBot.create :store
-    @builed_store = FactoryBot.build :store
+    @store_attributes = FactoryBot.attributes_for :store
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
 
   test "should create store" do
     assert_difference('Store.count') do
-      post stores_url, params: { store: { lockable: @builed_store.lockable, logo: @builed_store.logo, name: @builed_store.name } }
+      post stores_url, params: { store: @store_attributes }
     end
 
     assert_redirected_to store_url(Store.last)
@@ -35,7 +35,7 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update store" do
-    patch store_url(@store), params: { store: { lockable: @builed_store.lockable, logo: @builed_store.logo, name: @builed_store.name } }
+    patch store_url(@store), params: { store: @store_attributes }
     assert_redirected_to store_url(@store)
   end
 
