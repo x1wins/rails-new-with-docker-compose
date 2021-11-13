@@ -3,22 +3,22 @@ require "test_helper"
 class ShippingsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @shipping = FactoryBot.create :shipping
-    @builded_shipping = FactoryBot.build :shipping
-  end
-
-  test "should get index" do
-    get shippings_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_shipping_url
-    assert_response :success
+    @custom_attributes = FactoryBot.attributes_for :custom
+    @order_attributes = FactoryBot.attributes_for :order
+    @parcel_attributes = FactoryBot.attributes_for :parcel
+    @to_address_attributes = FactoryBot.attributes_for :to_address
+    @from_address_attributes = FactoryBot.attributes_for :from_address
+    @shipping_attributes = FactoryBot.attributes_for :shipping,
+                                                     custom_attributes: @custom_attributes,
+                                                     order_attributes: @order_attributes,
+                                                     parcel_attributes: @parcel_attributes,
+                                                     to_address_attributes: @to_address_attributes,
+                                                     from_address_attributes: @from_address_attributes
   end
 
   test "should create shipping" do
     assert_difference('Shipping.count') do
-      post shippings_url, params: { shipping: {  } }
+      post shippings_url, params: { shipping: @shipping_attributes }
     end
 
     assert_redirected_to shipping_url(Shipping.last)
@@ -35,7 +35,7 @@ class ShippingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update shipping" do
-    patch shipping_url(@shipping), params: { shipping: @builded_shipping }
+    patch shipping_url(@shipping), params: { shipping: @shipping_attributes }
     assert_redirected_to shipping_url(@shipping)
   end
 
