@@ -2,7 +2,18 @@ require "application_system_test_case"
 
 class ShippingsTest < ApplicationSystemTestCase
   setup do
-    @shipping = shippings(:one)
+    @shipping = FactoryBot.create :shipping
+    @custom_attributes = FactoryBot.attributes_for :custom
+    @order_attributes = FactoryBot.attributes_for :order
+    @parcel_attributes = FactoryBot.attributes_for :parcel
+    @to_address_attributes = FactoryBot.attributes_for :to_address
+    @from_address_attributes = FactoryBot.attributes_for :from_address
+    @shipping_attributes = FactoryBot.attributes_for :shipping,
+                                                     custom_attributes: @custom_attributes,
+                                                     order_attributes: @order_attributes,
+                                                     parcel_attributes: @parcel_attributes,
+                                                     to_address_attributes: @to_address_attributes,
+                                                     from_address_attributes: @from_address_attributes
   end
 
   test "visiting the index" do
