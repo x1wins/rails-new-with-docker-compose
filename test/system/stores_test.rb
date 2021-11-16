@@ -2,7 +2,8 @@ require "application_system_test_case"
 
 class StoresTest < ApplicationSystemTestCase
   setup do
-    @store = stores(:one)
+    @store = FactoryBot.create :store
+    @store_attributes = FactoryBot.attributes_for :store
   end
 
   test "visiting the index" do
