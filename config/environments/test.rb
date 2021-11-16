@@ -63,7 +63,7 @@ Rails.application.configure do
 end
 
 # Capybara.current_driver = :selenium
-# Capybara.app_host = 'http://www.google.com'
+# Capybara.app_host = 'http://web:3000'
 # Capybara.run_server = false
 
 # Capybara.app_host= "http://#{IPSocket.getaddress(Socket.gethostname)}:3001"
@@ -125,5 +125,5 @@ end
 Capybara.configure do |config|
   config.server = :puma, { Silent: true }
   config.server_host = selenium_app_host
-  config.server_port = 4000
+  # config.server_port = 3001
 end
