@@ -18,7 +18,7 @@ class ShippingsTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit shippings_url
-    assert_selector "h1", text: "Shippings"
+    assert_selector "h6", text: "Shipping list"
   end
 
   test "creating a Shipping" do
