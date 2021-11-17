@@ -79,23 +79,19 @@ Capybara.register_driver :selenium do |app|
 end
 
 Capybara.register_driver :remote_selenium do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument("--window-size=1400,1400")
-  options.add_argument("--no-sandbox")
-  options.add_argument("--disable-dev-shm-usage")
   client = Selenium::WebDriver::Remote::Http::Default.new
   client.read_timeout = 120
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-      chromeOptions: {'w3c' => false}
+  # capabilities = { "edgeOptions" => {'w3c' => false} }
+  capabilities = Selenium::WebDriver::Remote::Capabilities.edge(
+      edgeOptions: {'w3c' => false}
   )
   Capybara::Selenium::Driver.new(
       app,
-      browser: :chrome,
-      url: ENV['SELENIUM_REMOTE_URL'],
-      options: options,
+      browser: :edge,
+      url: ENV['SELENIUM_REMOTE_URL_EDGE'],
       http_client: client,
       desired_capabilities: capabilities
-      )
+  )
 end
 
 Capybara.register_driver :remote_selenium_headless do |app|
