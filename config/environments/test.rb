@@ -71,6 +71,12 @@ end
 # Capybara.server_host= IPSocket.getaddress(Socket.gethostname)
 # Capybara.server_port= 3001
 
+Capybara.register_driver :selenium do |app|
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.timeout = 120 # instead of the default 60
+  Capybara::Selenium::Driver.new(app, browser: :firefox, profile: profile, http_client: client)
+end
 
 Capybara.register_driver :remote_selenium do |app|
   options = Selenium::WebDriver::Chrome::Options.new
@@ -78,11 +84,15 @@ Capybara.register_driver :remote_selenium do |app|
   options.add_argument("--no-sandbox")
   options.add_argument("--disable-dev-shm-usage")
 
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.read_timeout = 120
+
   Capybara::Selenium::Driver.new(
       app,
       browser: :chrome,
       url: ENV['SELENIUM_REMOTE_URL'],
       options: options,
+      http_client: client
       )
 end
 
