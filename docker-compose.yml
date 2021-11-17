@@ -10,6 +10,8 @@ services:
     build: .
     environment:
       SELENIUM_REMOTE_URL: http://webdriver_chrome:4444/wd/hub
+      SELENIUM_REMOTE_URL_EDGE: http://webdriver_edge:4444/wd/hub
+      SELENIUM_REMOTE_URL_FIREFOX: http://webdriver_firefox:4444/wd/hub
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/myapp
@@ -23,5 +25,19 @@ services:
     ports:
       - "4444:4444"
       - "7900:7900"
+    volumes:
+      - "/dev/shm:/dev/shm"
+  webdriver_edge:
+    image: selenium/standalone-edge
+    ports:
+      - "4445:4444"
+      - "7901:7900"
+    volumes:
+      - "/dev/shm:/dev/shm"
+  webdriver_firefox:
+    image: selenium/standalone-firefox
+    ports:
+      - "4446:4444"
+      - "7902:7900"
     volumes:
       - "/dev/shm:/dev/shm"
