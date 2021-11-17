@@ -79,7 +79,7 @@ Capybara.register_driver :selenium do |app|
 end
 
 Capybara.register_driver :remote_selenium do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
+  options = Selenium::WebDriver::Firefox::Options.new
   options.add_argument("--window-size=1400,1400")
   options.add_argument("--no-sandbox")
   options.add_argument("--disable-dev-shm-usage")
@@ -90,8 +90,8 @@ Capybara.register_driver :remote_selenium do |app|
   )
   Capybara::Selenium::Driver.new(
       app,
-      browser: :chrome,
-      url: ENV['SELENIUM_REMOTE_URL'],
+      browser: :firefox,
+      url: ENV['SELENIUM_REMOTE_URL_FIREFOX'],
       options: options,
       http_client: client,
       desired_capabilities: capabilities
