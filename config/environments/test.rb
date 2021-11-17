@@ -83,16 +83,18 @@ Capybara.register_driver :remote_selenium do |app|
   options.add_argument("--window-size=1400,1400")
   options.add_argument("--no-sandbox")
   options.add_argument("--disable-dev-shm-usage")
-
   client = Selenium::WebDriver::Remote::Http::Default.new
   client.read_timeout = 120
-
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: {'w3c' => false}
+  )
   Capybara::Selenium::Driver.new(
       app,
       browser: :chrome,
       url: ENV['SELENIUM_REMOTE_URL'],
       options: options,
-      http_client: client
+      http_client: client,
+      desired_capabilities: capabilities
       )
 end
 
