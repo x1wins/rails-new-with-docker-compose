@@ -2,12 +2,13 @@ require "application_system_test_case"
 
 class StoresTest < ApplicationSystemTestCase
   setup do
-    @store = stores(:one)
+    @store = FactoryBot.create :store
+    @store_attributes = FactoryBot.attributes_for :store
   end
 
   test "visiting the index" do
     visit stores_url
-    assert_selector "h1", text: "Stores"
+    assert_selector "h1", text: "Store"
   end
 
   test "creating a Store" do

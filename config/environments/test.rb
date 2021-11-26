@@ -57,4 +57,85 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  config.hosts.clear
+
+end
+
+# Capybara.current_driver = :selenium
+# Capybara.app_host = 'http://web:3000'
+# Capybara.run_server = false
+
+# Capybara.app_host= "http://#{IPSocket.getaddress(Socket.gethostname)}:3001"
+# Capybara.server= :puma # Until your setup is working
+# Capybara.server_host= IPSocket.getaddress(Socket.gethostname)
+# Capybara.server_port= 3001
+
+Capybara.register_driver :selenium do |app|
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.timeout = 120 # instead of the default 60
+  Capybara::Selenium::Driver.new(app, browser: :firefox, profile: profile, http_client: client)
+end
+
+Capybara.register_driver :remote_selenium do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument("--window-size=1400,1400")
+  options.add_argument("--no-sandbox")
+  options.add_argument("--disable-dev-shm-usage")
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.read_timeout = 120
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: {'w3c' => false}
+  )
+  Capybara::Selenium::Driver.new(
+      app,
+      browser: :chrome,
+      url: ENV['SELENIUM_REMOTE_URL'],
+      options: options,
+      http_client: client,
+      desired_capabilities: capabilities
+      )
+end
+
+Capybara.register_driver :remote_selenium_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument("--headless")
+  options.add_argument("--window-size=1400,1400")
+  options.add_argument("--no-sandbox")
+  options.add_argument("--disable-dev-shm-usage")
+
+  Capybara::Selenium::Driver.new(
+      app,
+      browser: :chrome,
+      url: ENV['SELENIUM_REMOTE_URL'],
+      options: options,
+      )
+end
+
+Capybara.register_driver :local_selenium do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument("--window-size=1400,1400")
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.register_driver :local_selenium_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument("--headless")
+  options.add_argument("--window-size=1400,1400")
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+selenium_app_host = ENV.fetch("SELENIUM_APP_HOST") do
+  Socket.ip_address_list
+      .find(&:ipv4_private?)
+      .ip_address
+end
+
+Capybara.configure do |config|
+  config.server = :puma, { Silent: true }
+  config.server_host = selenium_app_host
+  # config.server_port = 3001
 end
