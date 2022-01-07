@@ -47,3 +47,61 @@ searched_list.size
 ActiveRecord::Base.connection.execute("EXPLAIN ANALYZE #{PgSearch.multisearch('Diablo').to_sql}").values
 
 PgSearch::Multisearch.rebuild(Shipping)
+PgSearch::Multisearch.rebuild(Shipping, clean_up: true)
+
+irb(main):012:0> ActiveRecord::Base.connection.indexes('pg_search_documents').map(&:name)
+=> ["index_pg_search_documents_on_searchable"]
+irb(main):013:0> ActiveRecord::Base.connection.indexes('pg_search_documents')
+=> 
+[#<ActiveRecord::ConnectionAdapters::IndexDefinition:0x00005635d4eee700
+  @columns=["searchable_type", "searchable_id"],
+  @comment=nil,
+  @lengths={},
+  @name="index_pg_search_documents_on_searchable",
+  @opclasses={},
+  @orders={},
+  @table="pg_search_documents",
+  @type=nil,
+  @unique=false,
+  @using=:btree,
+  @where=nil>]
+
+
+
+https://github.com/Casecommons/pg_search/wiki/Building-indexes#how-to-create-a-model-scope-and-use-multisearch-index
+% docker-compose run --no-deps web rails generate migration add_index_to_documents_content
+class AddIndexToDocumentsContent < ActiveRecord::Migration[6.1]
+  def change
+    add_index :pg_search_documents, %[to_tsvector('simple', coalesce("pg_search_documents"."content"::text, ''))], using: :gin, name: "index_pg_search_documents_on_content"
+  end
+end
+% docker-compose run --no-deps web rails db:migrate
+% docker-compose run --no-deps web rails console
+> ActiveRecord::Base.connection.indexes(:pg_search_documents)
+>=> 
+ [#<ActiveRecord::ConnectionAdapters::IndexDefinition:0x000056053f9e1c00
+   @columns="to_tsvector('simple'::regconfig, COALESCE(content, ''::text))",
+   @comment=nil,
+   @lengths={},
+   @name="index_pg_search_documents_on_content",
+   @opclasses={},
+   @orders={},
+   @table=:pg_search_documents,
+   @type=nil,
+   @unique=false,
+   @using=:gin,
+   @where=nil>,
+  #<ActiveRecord::ConnectionAdapters::IndexDefinition:0x000056053f9e12a0
+   @columns=["searchable_type", "searchable_id"],
+   @comment=nil,
+   @lengths={},
+   @name="index_pg_search_documents_on_searchable",
+   @opclasses={},
+   @orders={},
+   @table=:pg_search_documents,
+   @type=nil,
+   @unique=false,
+   @using=:btree,
+   @where=nil>]  
+   
+   
