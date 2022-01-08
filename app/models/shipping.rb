@@ -16,7 +16,7 @@ class Shipping < ApplicationRecord
   scope :full_text_search_for, -> (term) do
     joins(:pg_search_document).merge(
         PgSearch.multisearch(term).where(searchable_type: klass.to_s)
-    )
+    ) if term.present?
   end
   def order_product_name
     order.product_name
