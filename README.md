@@ -45,6 +45,7 @@ searched_list.size
 
 
 ActiveRecord::Base.connection.execute("EXPLAIN ANALYZE #{PgSearch.multisearch('Diablo').to_sql}").values
+ActiveRecord::Base.connection.execute("EXPLAIN ANALYZE #{Shipping.full_text_search_for('kim').to_sql}").values
 
 PgSearch::Multisearch.rebuild(Shipping)
 PgSearch::Multisearch.rebuild(Shipping, clean_up: true)
