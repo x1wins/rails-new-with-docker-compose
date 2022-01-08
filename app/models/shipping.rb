@@ -14,7 +14,9 @@ class Shipping < ApplicationRecord
   accepts_nested_attributes_for :to_address, allow_destroy: true, update_only: true
   accepts_nested_attributes_for :from_address, allow_destroy: true, update_only: true
   scope :full_text_search_for, -> (term) do
-    PgSearch.multisearch(term).where(searchable_type: name).pluck(:searchable_id)
+    joins(:pg_search_document).merge(
+        PgSearch.multisearch(term).where(searchable_type: klass.to_s)
+    )
   end
   def order_product_name
     order.product_name
