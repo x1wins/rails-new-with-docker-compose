@@ -7,18 +7,16 @@
   </button>
 
   <!-- Topbar Search -->
-  <form
-    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="/shippings" method="get">
+  <%= form_tag shippings_path, method: :get, class: "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" do %>
     <div class="input-group">
-      <input type="text" class="form-control bg-light border-0 small" placeholder="Shipping Search for..."
-             aria-label="Search" aria-describedby="basic-aDMddon2" name="q" value="<%= @q %>"/>
+      <%= text_field_tag :q, @q, type: 'text', class: "form-control bg-light border-0 small", placeholder: "Shipping Search for..." %>
       <div class="input-group-append">
-        <button class="btn btn-primary" type="button">
+        <%= button_tag(type: "submit", class: "btn btn-primary") do %>
           <i class="fas fa-search fa-sm"></i>
-        </button>
+        <% end %>
       </div>
     </div>
-  </form>
+  <% end %>
 
   <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
