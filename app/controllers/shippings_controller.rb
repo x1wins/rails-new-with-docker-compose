@@ -5,7 +5,8 @@ class ShippingsController < ApplicationController
   def index
     @q = params[:q]
     if @q.present?
-      @shippings = Shipping.unscoped.order("shippings.id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address).all_search(@q)
+      ids = Shipping.full_text_search_for(@q)
+      @pagy, @shippings = pagy(Shipping.where(id: ids).order("shippings.id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address))
     else
       @pagy, @shippings = pagy(Shipping.unscoped.order("shippings.id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address))
     end
