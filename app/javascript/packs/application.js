@@ -24,5 +24,7 @@ require("startbootstrap-sb-admin-2/img/undraw_profile_1.svg")
 require("startbootstrap-sb-admin-2/img/undraw_profile_2.svg")
 require("startbootstrap-sb-admin-2/img/undraw_profile_3.svg")
 require("startbootstrap-sb-admin-2/img/undraw_rocket.svg")
+require("autocompleter/autocomplete.js")
+require("autocompleter/autocomplete.css")
 
 require("packs/autocomplete")
