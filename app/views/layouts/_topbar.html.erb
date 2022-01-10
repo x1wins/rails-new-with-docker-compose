@@ -5,18 +5,7 @@
   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
     <i class="fa fa-bars"></i>
   </button>
-
-  <!-- Topbar Search -->
-  <%= form_tag shippings_path, method: :get, class: "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" do %>
-    <div class="input-group">
-      <%= text_field_tag :q, @q, type: 'text', class: "form-control bg-light border-0 small", placeholder: "Shipping Search for..." %>
-      <div class="input-group-append">
-        <%= button_tag(type: "submit", class: "btn btn-primary") do %>
-          <i class="fas fa-search fa-sm"></i>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+  <input id="country" type="text" autocomplete="off" />
 
   <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
