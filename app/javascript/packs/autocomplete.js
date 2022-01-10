@@ -7,12 +7,11 @@ document.addEventListener("turbolinks:load", function() {
         { label: 'United States', value: 'US' }
     ];
 
-    var input = document.getElementById("country");
+    var input = document.getElementById("q");
 
     autocomplete({
         input: input,
         fetch: function(text, update) {
-            console.log('autocom');
             text = text.toLowerCase();
             // you can also use AJAX requests instead of preloaded data
             var suggestions = countries.filter(n => n.label.toLowerCase().startsWith(text))
