@@ -1,6 +1,12 @@
 class ShippingsController < ApplicationController
   before_action :set_shipping, only: %i[ show edit update destroy ]
 
+  def autocomplete
+    @q = params[:q]
+    @shippings = Shipping.full_text_search_for(@q).limit(10)
+    render json: @shippings
+  end
+
   # GET /shippings or /shippings.json
   def index
     @q = params[:q]
