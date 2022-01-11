@@ -3,8 +3,8 @@ class ShippingsController < ApplicationController
 
   def autocomplete
     @q = params[:q]
-    @shippings = Shipping.full_text_search_for(@q).limit(10)
-    render json: @shippings
+    @shippings = Shipping.full_text_search_for(@q).includes(:order).limit(10)
+    render template: "shippings/autocomplete.json"
   end
 
   # GET /shippings or /shippings.json
