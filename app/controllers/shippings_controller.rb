@@ -6,10 +6,27 @@ class ShippingsController < ApplicationController
     @shippings = Shipping.full_text_search_for(@q).includes(:order).limit(10)
     @labels = []
     @shippings.each do |shipping|
-      @labels << shipping.order.product_name
+      add_value_to_labels_if_contain(@labels, @q, shipping.order.product_name)
+      add_value_to_labels_if_contain(@labels, @q, shipping.parcel.memo)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.ssn)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.phone1)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.phone2)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.address1)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.address2)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.zipcode)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.ssn)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.phone1)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.phone2)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.address1)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.address2)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.zipcode)
     end
     @labels.uniq!
     render template: "shippings/autocomplete.json"
+  end
+
+  def add_value_to_labels_if_contain label, q, str
+    label << str if str.downcase.include? q.downcase
   end
 
   # GET /shippings or /shippings.json

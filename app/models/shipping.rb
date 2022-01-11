@@ -18,6 +18,16 @@ class Shipping < ApplicationRecord
         PgSearch.multisearch(term).where(searchable_type: klass.to_s)
     ) if term.present?
   end
+  pg_search_scope :search_name, associated_against: { order: :product_name }, using: :trigram
+  pg_search_scope :all_search, associated_against: {
+      order: [:order_number, :product_name, :price],
+      parcel: :memo,
+      to_address: [:owner_name, :ssn, :phone1, :phone2, :address1, :address2, :zipcode],
+      from_address: [:owner_name, :ssn, :phone1, :phone2, :address1, :address2, :zipcode]
+  }, using: {
+      tsearch: {negation: true}
+  }
+
   def order_product_name
     order.product_name
   end

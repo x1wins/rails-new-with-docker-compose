@@ -109,3 +109,7 @@ end
    @where=nil>]  
    
    
+   
+joins(:pg_search_document).merge(
+     Shipping.search_name(@q).where(searchable_type: Shipping.to_s)
+    )   
