@@ -4,6 +4,11 @@ class ShippingsController < ApplicationController
   def autocomplete
     @q = params[:q]
     @shippings = Shipping.full_text_search_for(@q).includes(:order).limit(10)
+    @labels = []
+    @shippings.each do |shipping|
+      @labels << shipping.order.product_name
+    end
+    @labels.uniq!
     render template: "shippings/autocomplete.json"
   end
 
