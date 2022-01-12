@@ -28,3 +28,4 @@ require("autocompleter/autocomplete.js")
 require("autocompleter/autocomplete.css")
 
 require("packs/autocomplete")
+require("packs/handle_error")
