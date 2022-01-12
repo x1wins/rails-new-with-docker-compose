@@ -16,6 +16,11 @@ class ShippingsControllerTest < ActionDispatch::IntegrationTest
                                                      from_address_attributes: @from_address_attributes
   end
 
+  test "should show autocomplete" do
+    get autocomplete_shippings_url, params: {q: 'call'}
+    assert_response :success
+  end
+
   test "should create shipping" do
     assert_difference('Shipping.count') do
       post shippings_url, params: { shipping: @shipping_attributes }
