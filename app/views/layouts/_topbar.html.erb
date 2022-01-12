@@ -11,7 +11,11 @@
     <div class="input-group">
       <%= text_field_tag :q, @q, type: 'search', class: "form-control bg-light border-0 small", placeholder: "Shipping Search for...", autocomplete: "off" %>
       <div class="input-group-append">
-        <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+        <span class="input-group-text" id="autocomplete-spinner-addon">
+          <div class="spinner-border float-right" role="status">
+          </div>
+        </span>
+        <%= button_tag(type: "submit", class: "btn btn-primary", id: 'id="autocomplete-button-addon"') do %>
           <i class="fas fa-search fa-sm"></i>
         <% end %>
       </div>
