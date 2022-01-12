@@ -18,6 +18,9 @@ class Shipping < ApplicationRecord
         PgSearch.multisearch(term).where(searchable_type: klass.to_s)
     ) if term.present?
   end
+  scope :autocomplete_search_for, -> (term) do
+    PgSearch::Document.multisearch(term).where(searchable_type: klass.to_s) if term.present?
+  end
   pg_search_scope :search_name, associated_against: { order: :product_name }, using: :trigram
   pg_search_scope :all_search, associated_against: {
       order: [:order_number, :product_name, :price],

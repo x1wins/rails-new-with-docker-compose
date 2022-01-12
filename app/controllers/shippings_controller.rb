@@ -3,7 +3,13 @@ class ShippingsController < ApplicationController
 
   def autocomplete
     @q = params[:q]
-    @shippings = Shipping.full_text_search_for(@q).includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address).limit(10)
+    @documents = Shipping.autocomplete_search_for(@q)
+    shipping_ids = []
+    @documents.each do |document|
+      shipping_ids << document.searchable_id
+    end
+    @shippings = Shipping.where(id: shipping_ids).includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address).limit(10)
+
     @labels = []
     @shippings.each do |shipping|
       add_value_to_labels_if_contain(@labels, @q, shipping.order.product_name)
