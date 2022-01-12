@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_24_075121) do
+ActiveRecord::Schema.define(version: 2022_01_07_065100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 2021_10_24_075121) do
     t.string "address2"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["address1"], name: "index_addresses_on_address1"
+    t.index ["address2"], name: "index_addresses_on_address2"
+    t.index ["owner_name"], name: "index_addresses_on_owner_name"
+    t.index ["phone1"], name: "index_addresses_on_phone1"
+    t.index ["phone2"], name: "index_addresses_on_phone2"
+    t.index ["ssn"], name: "index_addresses_on_ssn"
+    t.index ["type", "owner_name", "ssn", "phone1", "phone2", "zipcode", "address1", "address2"], name: "index_addresses_on_all"
+    t.index ["type"], name: "index_addresses_on_type"
+    t.index ["zipcode"], name: "index_addresses_on_zipcode"
   end
 
   create_table "customs", force: :cascade do |t|
@@ -47,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_10_24_075121) do
     t.bigint "shipping_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_name"], name: "index_orders_on_product_name"
     t.index ["shipping_id"], name: "index_orders_on_shipping_id"
   end
 
@@ -57,7 +67,18 @@ ActiveRecord::Schema.define(version: 2021_10_24_075121) do
     t.bigint "shipping_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["memo"], name: "index_parcels_on_memo"
     t.index ["shipping_id"], name: "index_parcels_on_shipping_id"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index "to_tsvector('simple'::regconfig, COALESCE(content, ''::text))", name: "index_pg_search_documents_on_content", using: :gin
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
   create_table "shippings", force: :cascade do |t|

@@ -7,7 +7,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Shipping list</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Shipping list <span class="badge badge-info badge-counter"><%= @pagy.present? ? @pagy.count : @shippings.count %></span></h6>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -62,7 +62,7 @@
     </div>
     <div class="table-responsive">
       <div class="d-flex justify-content-center">
-        <%== pagy_bootstrap_nav(@pagy) %>
+        <%== pagy_bootstrap_nav(@pagy) if @pagy.present? %>
       </div>
     </div>
   </div>

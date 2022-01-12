@@ -60,3 +60,4 @@ gem 'faker'
 # end
 gem 'pagy'
 gem 'rexml', '~> 3.2', '>= 3.2.5'
+gem 'pg_search'

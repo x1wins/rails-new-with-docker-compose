@@ -3,7 +3,12 @@ class ShippingsController < ApplicationController
 
   # GET /shippings or /shippings.json
   def index
-    @pagy, @shippings = pagy(Shipping.unscoped.order("id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address))
+    @q = params[:q]
+    if @q.present?
+      @shippings = Shipping.unscoped.order("shippings.id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address).all_search(@q)
+    else
+      @pagy, @shippings = pagy(Shipping.unscoped.order("shippings.id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address))
+    end
   end
 
   # GET /shippings/1 or /shippings/1.json
