@@ -22,7 +22,7 @@ class ShippingsController < ApplicationController
       add_value_to_labels_if_contain(@labels, @q, shipping.from_address.zipcode)
     end
     @labels.uniq!
-    render template: "shippings/autocomplete.json"
+    render partial: 'autocomplete', formats: [:json]
   end
 
   def add_value_to_labels_if_contain label, q, str
