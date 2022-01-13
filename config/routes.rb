@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'shippings/autocomplete'
   resources :shippings
   resources :stores
   get 'home/index'

@@ -1,6 +1,8 @@
 class Shipping < ApplicationRecord
   include PgSearch::Model
-  multisearchable against: [:order_product_name, :parcel_memo, :to_address_owner_name, :from_address_owner_name]
+  multisearchable against: [:order_product_name, :parcel_memo,
+      :to_address_ssn, :to_address_phone1, :to_address_phone2, :to_address_address1, :to_address_address2, :to_address_zipcode,
+      :from_address_ssn, :from_address_phone1, :from_address_phone2, :from_address_address1, :from_address_address2, :from_address_zipcode]
   has_one :custom, dependent: :destroy
   has_one :order, dependent: :destroy
   has_one :parcel, dependent: :destroy
@@ -11,6 +13,25 @@ class Shipping < ApplicationRecord
   accepts_nested_attributes_for :parcel, allow_destroy: true, update_only: true
   accepts_nested_attributes_for :to_address, allow_destroy: true, update_only: true
   accepts_nested_attributes_for :from_address, allow_destroy: true, update_only: true
+  scope :full_text_search_for, -> (term) do
+    joins(:pg_search_document).merge(
+        PgSearch.multisearch(term).where(searchable_type: klass.to_s)
+    ) if term.present?
+  end
+  scope :autocomplete_search_for, -> (term) do
+    joins(:pg_search_document).merge(
+        PgSearch::Document.multisearch(term).where(searchable_type: klass.to_s)
+    ) if term.present?
+  end
+  pg_search_scope :search_name, associated_against: { order: :product_name }, using: :trigram
+  pg_search_scope :all_search, associated_against: {
+      order: [:order_number, :product_name, :price],
+      parcel: :memo,
+      to_address: [:owner_name, :ssn, :phone1, :phone2, :address1, :address2, :zipcode],
+      from_address: [:owner_name, :ssn, :phone1, :phone2, :address1, :address2, :zipcode]
+  }, using: {
+      tsearch: {negation: true}
+  }
 
   def order_product_name
     order.product_name
@@ -21,7 +42,43 @@ class Shipping < ApplicationRecord
   def to_address_owner_name
     to_address.owner_name
   end
+  def to_address_ssn
+    to_address.ssn
+  end
+  def to_address_phone1
+    to_address.phone1
+  end
+  def to_address_phone2
+    to_address.phone2
+  end
+  def to_address_address1
+    to_address.address1
+  end
+  def to_address_address2
+    to_address.address2
+  end
+  def to_address_zipcode
+    to_address.zipcode
+  end
   def from_address_owner_name
     from_address.owner_name
+  end
+  def from_address_ssn
+    from_address.ssn
+  end
+  def from_address_phone1
+    from_address.phone1
+  end
+  def from_address_phone2
+    from_address.phone2
+  end
+  def from_address_address1
+    from_address.address1
+  end
+  def from_address_address2
+    from_address.address2
+  end
+  def from_address_zipcode
+    from_address.zipcode
   end
 end

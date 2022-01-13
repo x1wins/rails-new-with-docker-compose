@@ -1,14 +1,38 @@
 class ShippingsController < ApplicationController
   before_action :set_shipping, only: %i[ show edit update destroy ]
 
+  def autocomplete
+    @q = params[:q]
+    @shippings = Shipping.autocomplete_search_for(@q).includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address).limit(10)
+    @labels = []
+    @shippings.each do |shipping|
+      add_value_to_labels_if_contain(@labels, @q, shipping.order.product_name)
+      add_value_to_labels_if_contain(@labels, @q, shipping.parcel.memo)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.ssn)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.phone1)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.phone2)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.address1)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.address2)
+      add_value_to_labels_if_contain(@labels, @q, shipping.to_address.zipcode)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.ssn)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.phone1)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.phone2)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.address1)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.address2)
+      add_value_to_labels_if_contain(@labels, @q, shipping.from_address.zipcode)
+    end
+    @labels.uniq!
+    render template: "shippings/autocomplete.json"
+  end
+
+  def add_value_to_labels_if_contain label, q, str
+    label << str if str.downcase.include? q.downcase
+  end
+
   # GET /shippings or /shippings.json
   def index
     @q = params[:q]
-    if @q.present?
-      @shippings = Shipping.unscoped.order("shippings.id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address).all_search(@q)
-    else
-      @pagy, @shippings = pagy(Shipping.unscoped.order("shippings.id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address))
-    end
+    @pagy, @shippings = pagy(Shipping.full_text_search_for(@q).order("shippings.id DESC").includes(:custom).includes(:order).includes(:parcel).includes(:to_address).includes(:from_address))
   end
 
   # GET /shippings/1 or /shippings/1.json
