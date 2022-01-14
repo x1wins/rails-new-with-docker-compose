@@ -20,7 +20,7 @@ document.addEventListener("turbolinks:load", function() {
                 if(currentText == text){
                     fetchAutocomplete(spinner, button, text, update);
                 }
-            }, 1000)
+            }, 500)
         },
         onSelect: function(item) {
             input.value = item.label;
