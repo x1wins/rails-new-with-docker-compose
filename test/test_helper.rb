@@ -10,6 +10,7 @@ class ActiveSupport::TestCase
   # Make `assert_*` methods behave like Minitest assertions
   include Capybara::Minitest::Assertions
 
+  Capybara.default_max_wait_time = 5
   # Reset sessions and driver between tests
   teardown do
     Capybara.reset_sessions!
