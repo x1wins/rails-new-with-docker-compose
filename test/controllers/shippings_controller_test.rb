@@ -17,7 +17,11 @@ class ShippingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show autocomplete" do
-    get autocomplete_shippings_url, params: {q: 'call'}
+    q = @shipping.order.product_name
+    get autocomplete_shippings_url, params: { q: q }
+    labels = @response.parsed_body
+    assert_same labels.size, 1
+    labels.each { |node| assert_match q, node['label'] }
     assert_response :success
   end
 

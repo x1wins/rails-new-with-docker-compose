@@ -21,6 +21,18 @@ class ShippingsTest < ApplicationSystemTestCase
     assert_selector "h6", text: "Shipping list"
   end
 
+  test "should show autocomplete" do
+    visit shippings_url
+    q = @shipping.order.product_name.split.first
+    fill_in "q", with: q
+    sleep 3
+    assert_text q
+    assert_text @shipping.order.product_name
+    find("#autocomplete-button-addon").click
+    sleep 1
+    assert_text @shipping.order.product_name
+  end
+
   test "creating a Shipping" do
     visit shippings_url
     click_on "New Shipping"
