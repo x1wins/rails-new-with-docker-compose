@@ -1,115 +1,61 @@
-# README
+# How to generate rails new project with docker-compose
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+when i run command with $ rails new PROJECT with postgresql
+i realize struggle and tired that generate rails project files and setup database. 
+if i got something wrong local environment such as rbenv, rvm on macOS or another OS. it's made me burnout.
 
-Things you may want to cover:
+docker-compose is perfect awesome developerment environment. 
+when i generate rails project with docker-compose, i don't need any setup on local environment like ruby, rails version, database setup. 
+docker-compose made easy setup rails project, database and another env.
 
-* Ruby version
+## config/database.yml
+```
+$ vim config/database.yml
+```
+```yaml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password: password
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-* System dependencies
+development:
+  <<: *default
+  database: myapp_development
 
-* Configuration
+test:
+  <<: *default
+  database: myapp_test
 
-* Database creation
+production:
+  <<: *default
+  database: myapp_production
+  username: myapp
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+```
 
-* Database initialization
+## Setup
+```bash
+docker-compose run --no-deps web bundle exec rails webpacker:install
+docker-compose run --no-deps web bundle exec rake db:create
+docker-compose run --no-deps web bundle exec rake db:migrate
+docker-compose run --no-deps web bundle exec rake db:create RAILS_ENV=test
+docker-compose run --no-deps web bundle exec rake db:migrate RAILS_ENV=test
+```
 
-* How to run the test suite
+## Start rails server
+```bash
+docker-compose up --build
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Restart
+```
+docker-compose restart web
+```
 
-* Deployment instructions
-
-* ...
-
-shipping = FactoryBot.create :shipping
-word = shipping.parcel.memo
-searched_list = PgSearch.multisearch(word)
-searched_list.first
-id = searched_list.first.searchable_id
-sarched_memo = Shipping.find_by_id(id).parcel.memo
-sarched_memo == word
-searched_list.size
-
-
-shipping = FactoryBot.create :shipping
-word = shipping.parcel.memo
-word = word.split.first
-searched_list = PgSearch.multisearch(word)
-searched_list.first
-id = searched_list.first.searchable_id
-sarched_memo = Shipping.find_by_id(id).parcel.memo
-sarched_memo == word
-searched_list.size
-
-
-ActiveRecord::Base.connection.execute("EXPLAIN ANALYZE #{PgSearch.multisearch('Diablo').to_sql}").values
-ActiveRecord::Base.connection.execute("EXPLAIN ANALYZE #{Shipping.full_text_search_for(term).to_sql}").values
-ActiveRecord::Base.connection.execute("EXPLAIN ANALYZE #{PgSearch.multisearch('diablo').to_sql}").values
-Shipping.full_text_search_for(term)
-PgSearch.multisearch(term)
-
-PgSearch::Multisearch.rebuild(Shipping)
-PgSearch::Multisearch.rebuild(Shipping, clean_up: true)
-
-irb(main):012:0> ActiveRecord::Base.connection.indexes('pg_search_documents').map(&:name)
-=> ["index_pg_search_documents_on_searchable"]
-irb(main):013:0> ActiveRecord::Base.connection.indexes('pg_search_documents')
-=> 
-[#<ActiveRecord::ConnectionAdapters::IndexDefinition:0x00005635d4eee700
-  @columns=["searchable_type", "searchable_id"],
-  @comment=nil,
-  @lengths={},
-  @name="index_pg_search_documents_on_searchable",
-  @opclasses={},
-  @orders={},
-  @table="pg_search_documents",
-  @type=nil,
-  @unique=false,
-  @using=:btree,
-  @where=nil>]
-
-
-
-https://github.com/Casecommons/pg_search/wiki/Building-indexes#how-to-create-a-model-scope-and-use-multisearch-index
-% docker-compose run --no-deps web rails generate migration add_index_to_documents_content
-class AddIndexToDocumentsContent < ActiveRecord::Migration[6.1]
-  def change
-    add_index :pg_search_documents, %[to_tsvector('simple', coalesce("pg_search_documents"."content"::text, ''))], using: :gin, name: "index_pg_search_documents_on_content"
-  end
-end
-% docker-compose run --no-deps web rails db:migrate
-% docker-compose run --no-deps web rails console
-> ActiveRecord::Base.connection.indexes(:pg_search_documents)
->=> 
- [#<ActiveRecord::ConnectionAdapters::IndexDefinition:0x000056053f9e1c00
-   @columns="to_tsvector('simple'::regconfig, COALESCE(content, ''::text))",
-   @comment=nil,
-   @lengths={},
-   @name="index_pg_search_documents_on_content",
-   @opclasses={},
-   @orders={},
-   @table=:pg_search_documents,
-   @type=nil,
-   @unique=false,
-   @using=:gin,
-   @where=nil>,
-  #<ActiveRecord::ConnectionAdapters::IndexDefinition:0x000056053f9e12a0
-   @columns=["searchable_type", "searchable_id"],
-   @comment=nil,
-   @lengths={},
-   @name="index_pg_search_documents_on_searchable",
-   @opclasses={},
-   @orders={},
-   @table=:pg_search_documents,
-   @type=nil,
-   @unique=false,
-   @using=:btree,
-   @where=nil>]  
-   
-   
-   
-joins(:pg_search_document).merge(
-     Shipping.search_name(@q).where(searchable_type: Shipping.to_s)
-    )   
+## Console
+```
+docker-compose run --no-deps web bundle exec rails console
+```
