@@ -21,7 +21,7 @@ services:
       - db
       - webdriver_chrome
   webdriver_chrome:
-    image: selenium/standalone-chrome
+    image: seleniarm/standalone-chromium:latest
     ports:
       - "4444:4444"
       - "7900:7900"
