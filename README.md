@@ -59,3 +59,8 @@ docker-compose restart web
 ```
 docker-compose run --no-deps web bundle exec rails console
 ```
+
+## Rake
+```bash
+docker-compose run --no-deps web rails g task dev shippings_seeds
+```
