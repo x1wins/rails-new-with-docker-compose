@@ -39,6 +39,7 @@ production:
 ## Setup
 ```bash
 docker-compose run --no-deps web bundle exec rails webpacker:install
+docker-compose run --no-deps web bundle exec rails webpacker:install RAILS_ENV=test
 docker-compose run --no-deps web bundle exec rake db:create
 docker-compose run --no-deps web bundle exec rake db:migrate
 docker-compose run --no-deps web bundle exec rake db:create RAILS_ENV=test
@@ -59,3 +60,41 @@ docker-compose restart web
 ```
 docker-compose run --no-deps web bundle exec rails console
 ```
+
+## Rake
+```bash
+docker-compose run --no-deps web rails g task dev shippings_seeds
+```
+
+## Testing
+Selenium Grid
+- http://localhost:4444
+
+Selenium Grid noVNC
+- http://localhost:7900
+```bash
+docker-compose run --no-deps web rails test
+docker-compose run --no-deps web rails test:system
+docker-compose run --no-deps web rails test:all
+```
+
+### apple silicon m1 chip
+there is two solution for selenium on m1 chip. selenium is not working on m1 chip. there is need builded image for arm64 for m1 chip.
+- first solution 
+  - arm64 seleniarm
+    - docker-compose.yml
+      ```bash
+      image: seleniarm/standalone-chromium:latest
+      ```
+- second solution 
+  - build chroium in local
+    - https://github.com/seleniumhq-community/docker-seleniarm#only-building-the-images
+    - docker-compose.yml
+      ```bash
+      image: local-seleniarm/standalone-chromium:latest
+      ```
+      ```bash
+      git clone https://github.com/seleniumhq-community/docker-seleniarm.git
+      cd docker-seleniarm
+      ./build.sh arm64
+      ```
