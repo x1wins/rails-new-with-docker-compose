@@ -45,11 +45,14 @@ production:
 
 ## Setup
 ```bash
-docker-compose run --no-deps web bundle exec rails webpacker:install
 docker-compose run --no-deps web bundle exec rake db:create
 docker-compose run --no-deps web bundle exec rake db:migrate
 docker-compose run --no-deps web bundle exec rake db:create RAILS_ENV=test
 docker-compose run --no-deps web bundle exec rake db:migrate RAILS_ENV=test
+```
+or
+```bash
+docker-compose run --no-deps web bundle exec rake db:prepare
 ```
 
 ## Start rails server
