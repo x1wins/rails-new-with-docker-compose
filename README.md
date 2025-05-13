@@ -15,6 +15,20 @@ $ cd ./rails-new-with-docker-compose
 $ docker-compose run --no-deps web rails new . --force --database=postgresql
 ```
 
+## Dockerfile
+```dockerfile
+# To this
+ENV RAILS_ENV="development" \
+    BUNDLE_PATH="/usr/local/bundle"
+
+# Set production environment
+#ENV RAILS_ENV="production" \
+#    BUNDLE_DEPLOYMENT="1" \
+#    BUNDLE_PATH="/usr/local/bundle" \
+#    BUNDLE_WITHOUT="development"
+
+```
+
 ## config/database.yml
 ```
 $ vim config/database.yml
@@ -45,6 +59,8 @@ production:
 
 ## Setup
 ```bash
+docker-compose build
+docker-compose run --no-deps web bin/rails credentials:edit
 docker-compose run --no-deps web bundle exec rake db:create
 docker-compose run --no-deps web bundle exec rake db:migrate
 docker-compose run --no-deps web bundle exec rake db:create RAILS_ENV=test
