@@ -14,8 +14,6 @@ $ git clone https://github.com/x1wins/rails-new-with-docker-compose.git
 $ cd ./rails-new-with-docker-compose
 $ docker-compose run --no-deps web rails new [YOUR_PROJECT_PATH] --force --database=postgresql
 # $ docker-compose run --no-deps web rails new . --force --database=postgresql
-
-docker-compose run --no-deps web rails new ../cw-sample-rails-app-1 --force --database=postgresql
 ```
 
 ## Dockerfile
