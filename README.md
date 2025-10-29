@@ -12,71 +12,15 @@ docker-compose made easy setup rails project, database and another env.
 ```
 $ git clone https://github.com/x1wins/rails-new-with-docker-compose.git
 $ cd ./rails-new-with-docker-compose
-$ docker-compose run --no-deps web rails new . --force --database=postgresql
-```
+$ docker-compose run --no-deps web rails new [YOUR_PROJECT] --force --database=postgresql
 
-## Dockerfile
-```dockerfile
-# To this
-ENV RAILS_ENV="development" \
-    BUNDLE_PATH="/usr/local/bundle"
-
-# Set production environment
-#ENV RAILS_ENV="production" \
-#    BUNDLE_DEPLOYMENT="1" \
-#    BUNDLE_PATH="/usr/local/bundle" \
-#    BUNDLE_WITHOUT="development"
-```
-
-## Dockerfile
-```
-# Run and own only the runtime files as a non-root user for security
-RUN groupadd --system --gid 1000 rails && \
-    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails /rails # development
-#    chown -R rails:rails db log storage tmp # production
-USER 1000:1000
-```
-
-## config/database.yml
-```
-$ vim config/database.yml
-```
-```yaml
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  host: db
-  username: postgres
-  password: password
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-development:
-  <<: *default
-  database: myapp_development
-
-test:
-  <<: *default
-  database: myapp_test
-
-production:
-  primary: &primary_production
-    <<: *default
-    database: myapp_production
-    username: myapp
-    password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: myapp_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: myapp_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: myapp_production_cable
-    migrations_paths: db/cable_migrate
+mv [YOUR_PROJECT] ../
+cd ../[YOUR_PROJECT]
+cp config/database.yml ../[YOUR_PROJECT]/config/database.yml 
+cp Dockerfile ../[YOUR_PROJECT]
+cp docker-compose.yml ../[YOUR_PROJECT]
+cp entrypoint.sh ../[YOUR_PROJECT]
+docker-compose up --build
 ```
 
 ## Setup
