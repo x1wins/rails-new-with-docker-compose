@@ -26,7 +26,16 @@ ENV RAILS_ENV="development" \
 #    BUNDLE_DEPLOYMENT="1" \
 #    BUNDLE_PATH="/usr/local/bundle" \
 #    BUNDLE_WITHOUT="development"
+```
 
+## Dockerfile
+```
+# Run and own only the runtime files as a non-root user for security
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R rails:rails /rails # development
+#    chown -R rails:rails db log storage tmp # production
+USER 1000:1000
 ```
 
 ## config/database.yml
