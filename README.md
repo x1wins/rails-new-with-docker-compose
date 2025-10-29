@@ -42,11 +42,10 @@ docker-compose run --no-deps web bundle exec rake db:prepare
 docker-compose up --build
 ```
 
-## rm container
+## bundle install
 ```bash
-docker rmi rails-new-with-docker-compose_web
+docker-compose build --no-cache web
 ```
-
 
 ## Restart
 ```
@@ -56,5 +55,10 @@ docker-compose restart web
 ## Console
 ```
 docker-compose run --no-deps web bundle exec rails console
+```
+
+## rm container
+```bash
+docker rmi rails-new-with-docker-compose_web
 ```
 
