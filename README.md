@@ -3,7 +3,7 @@ Easy Generate Rails App Project with docker-compose.
 
 No more sqlite with rails. 
 
-Start postgresql for Production Ready with Docker.
+Start PostgreSQL for Production Ready with Docker.
 
 # Background
 When I run command with `$ rails new PROJECT with postgresql`
@@ -14,7 +14,19 @@ docker-compose is perfect awesome developerment environment.
 When i generate rails project with docker-compose, i don't need any setup on local environment like ruby, rails version, database setup. 
 docker-compose made easy setup rails project, database and another env.
 
-## How to Generate?
+## Run
+```
+git clone https://github.com/x1wins/rails-new-with-docker-compose.git
+cd ./rails-new-with-docker-compose
+./generate_rails_project.sh [YOUR_PROJECT]
+```
+It's Done. 
+
+Go to `cd ../[YOUR_PROJECT]` There are generated project. 
+
+Rails app and PostgreSQL container are already running.
+
+## How to Generate? (Manually generating Project)
 ```
 git clone https://github.com/x1wins/rails-new-with-docker-compose.git
 cd ./rails-new-with-docker-compose
