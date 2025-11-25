@@ -10,9 +10,9 @@ docker-compose made easy setup rails project, database and another env.
 
 ## ```rails new``` command with docker-compose
 ```
-$ git clone https://github.com/x1wins/rails-new-with-docker-compose.git
-$ cd ./rails-new-with-docker-compose
-$ docker-compose run --no-deps web rails new [YOUR_PROJECT] --force --database=postgresql
+git clone https://github.com/x1wins/rails-new-with-docker-compose.git
+cd ./rails-new-with-docker-compose
+docker-compose run --no-deps web rails new [YOUR_PROJECT] --force --database=postgresql
 
 mv [YOUR_PROJECT] ../
 cd ../[YOUR_PROJECT]
