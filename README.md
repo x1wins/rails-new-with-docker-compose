@@ -1,3 +1,15 @@
+## How to Run
+```
+git clone https://github.com/x1wins/rails-new-with-docker-compose.git
+cd ./rails-new-with-docker-compose
+./generate_rails_project.sh [YOUR_PROJECT]
+```
+It's Done.
+
+Go to `cd ../[YOUR_PROJECT]` There are generated project.
+
+Rails app and PostgreSQL container are already running.
+
 # Why?
 Easy Generate Rails App Project with docker-compose.
 
@@ -13,18 +25,6 @@ If I got something wrong local environment such as rbenv, rvm on macOS or anothe
 docker-compose is perfect awesome developerment environment. 
 When i generate rails project with docker-compose, i don't need any setup on local environment like ruby, rails version, database setup. 
 docker-compose made easy setup rails project, database and another env.
-
-## Run
-```
-git clone https://github.com/x1wins/rails-new-with-docker-compose.git
-cd ./rails-new-with-docker-compose
-./generate_rails_project.sh [YOUR_PROJECT]
-```
-It's Done. 
-
-Go to `cd ../[YOUR_PROJECT]` There are generated project. 
-
-Rails app and PostgreSQL container are already running.
 
 ## How to Generate? (Manually generating Project)
 ```
