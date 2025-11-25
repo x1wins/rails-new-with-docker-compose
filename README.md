@@ -1,25 +1,27 @@
-# How to generate rails new project with docker-compose
+# Why?
+Easy Generate Rails App Project with docker-compose.
+No more sqlite with rails. 
+Start postgresql for Production Ready with Docker.
 
-when i run command with $ rails new PROJECT with postgresql
-i realize struggle and tired that generate rails project files and setup database. 
-if i got something wrong local environment such as rbenv, rvm on macOS or another OS. it's made me burnout.
+# Background
+When I run command with `$ rails new PROJECT with postgresql`
+I realize struggle and tired that generate rails project files and setup database. 
+If I got something wrong local environment such as rbenv, rvm on macOS or another OS. It's made me burnout.
 
 docker-compose is perfect awesome developerment environment. 
-when i generate rails project with docker-compose, i don't need any setup on local environment like ruby, rails version, database setup. 
+When i generate rails project with docker-compose, i don't need any setup on local environment like ruby, rails version, database setup. 
 docker-compose made easy setup rails project, database and another env.
 
-## ```rails new``` command with docker-compose
+## How to Generate?
 ```
 git clone https://github.com/x1wins/rails-new-with-docker-compose.git
 cd ./rails-new-with-docker-compose
 docker-compose run --no-deps web rails new [YOUR_PROJECT] --force --database=postgresql
 
 mv [YOUR_PROJECT] ../
-cd ../[YOUR_PROJECT]
 cp config/database.yml ../[YOUR_PROJECT]/config/database.yml 
-cp Dockerfile ../[YOUR_PROJECT]
-cp docker-compose.yml ../[YOUR_PROJECT]
-cp entrypoint.sh ../[YOUR_PROJECT]
+cp Dockerfile docker-compose.yml entrypoint.sh  ../[YOUR_PROJECT]/
+cd ../[YOUR_PROJECT]
 docker-compose up --build
 ```
 
