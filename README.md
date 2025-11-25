@@ -1,6 +1,8 @@
 # Why?
 Easy Generate Rails App Project with docker-compose.
+
 No more sqlite with rails. 
+
 Start postgresql for Production Ready with Docker.
 
 # Background
