@@ -19,7 +19,7 @@ cp Dockerfile docker-compose.yml entrypoint.sh "$TARGET_PATH/"
 
 cd "$TARGET_PATH"
 docker-compose up --build -d
-docker-compose exec web bundle exec rake db:prepare
+docker-compose run --rm web bundle exec rake db:prepare
 echo ""
 echo "✓ Rails app running at: $(pwd)"
 echo ""
