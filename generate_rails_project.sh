@@ -16,5 +16,11 @@ TARGET_PATH="$WORK_DIR/$PROJECT_NAME"
 mv $PROJECT_NAME "$TARGET_PATH"
 cp config/database.yml "$TARGET_PATH/config/database.yml" 
 cp Dockerfile docker-compose.yml entrypoint.sh "$TARGET_PATH/"
+
 cd "$TARGET_PATH"
-docker-compose up --build
+docker-compose up --build -d
+docker-compose exec web bundle exec rake db:prepare
+echo ""
+echo "✓ Rails app running at: $(pwd)"
+echo ""
+docker-compose logs -f
